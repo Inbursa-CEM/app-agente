@@ -1,0 +1,35 @@
+.solicitar{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.solicitar h3{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.botonAyuda{
+    width: 200px !important;
+    height: 40px !important;
+    border-radius: 100px !important;
+    background-color: #E53434 !important;
+    margin-top: -10px !important;
+    color: white !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.botonAyuda{
+    width: 200px !important;
+    height: 40px !important;
+    border-radius: 100px !important;
+    background-color: #E53434 !important;
+    color: white !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.botonAyuda:hover{
+    background-color: #e38c8c !important;
+    color: rgb(200, 13, 13) !important;
+    font-family: 'Poppins', sans-serif !important;
+}

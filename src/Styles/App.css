@@ -20,6 +20,48 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.interfaz {
+  display: grid;
+  grid-template-columns: 1100px 400px; /* Definir dos columnas, una de 1000px y otra de 300px */
+  grid-gap: 10px; /* Espacio entre las columnas */
+}
+
+.contenedor {
+  background-color: #4e8ad4;
+  height: 340px;
+}
+
+.contenedor2 {
+  /* background-color: #aeb9c5; */
+  height: 700px;
+}
+
+.contenedor3{
+  margin-top: -350px;
+  background-color: #012148;
+  height: 340px;
+}
+
+
+.botonEstadisticas{
+  width: 380px !important;
+  height: 50px !important;
+  background-color: #6164A9 !important;
+  color: rgb(245, 242, 242) !important;
+  margin-left: 8px !important;
+  border-radius: 10px !important;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.botonEstadisticas:hover{
+  background-color: #9AB6FF !important;
+  color: #012148 !important;
+}
+
+.botonEstadisticas h4{
+  font-size: 25px;
+}
+
 .botonAzulMarino{
   width: 290px !important;
   height: 50px !important;
@@ -57,10 +99,11 @@
 }
 
 .botonGris{
-  width: 190px !important;
+  width: 380px !important;
   height: 50px !important;
   background-color: var(--gris-medio) !important;
   color: black !important;
+  margin-left: 8px !important;
   border-radius: 20px !important;
   font-family: 'Poppins', sans-serif !important;
 }
