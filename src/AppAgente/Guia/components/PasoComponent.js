@@ -1,6 +1,12 @@
 // PasoComponent.js
 import React from 'react';
+import '../styles/styles.css'
 
-const PasoComponent = ({ paso }) => <li>{paso}</li>;
+const PasoComponent = ({ paso }) => {
+  return (
+    <li>{paso}</li>
+
+  );
+};
 
 export default PasoComponent;
