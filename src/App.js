@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import ControlLlamada from "./AppAgente/componentes/ControlLlamada";
 import SolicitarAyuda from "./AppAgente/componentes/SolicitarAyuda";
 import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
+import InfoCliente from "./AppAgente/componentes/InfoCliente";
 // import Dashboard from "./App/Dashboard/dashboard";
 // import Monitoreo from "./App/TablaMonitoreo/monitoreo";
 // import Cursos from "./App/Cursos/cursos";
@@ -14,6 +15,7 @@ function App() {
     <div className="App">
       <div class="interfaz">
         <div class="contenedor">
+          <InfoCliente />
         </div>
         <div class="contenedor2">
           <EstatusLlamada />
