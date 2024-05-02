@@ -28,7 +28,7 @@
 
 .contenedor {
   background-color: #4e8ad4;
-  height: 340px;
+  height: 350px;
 }
 
 .contenedor2 {
@@ -38,8 +38,9 @@
 
 .contenedor3{
   margin-top: -350px;
-  background-color: #012148;
+  background-color: #325b8c;
   height: 340px;
+  overflow:auto;
 }
 
 .botonAzulMarino{
