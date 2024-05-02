@@ -1,7 +1,7 @@
 import EstatusLlamada from "./AppAgente/componentes/EstatusLlamada";
 import "./Styles/App.css";
-import { Button } from '@mui/material';
-import ControlLlamada from "./AppAgente/componentes/ControlLlamada";
+import Estadistica from "./AppAgente/componentes/Estadisticas";
+// import ControlLlamada from "./AppAgente/componentes/ControlLlamada";
 import SolicitarAyuda from "./AppAgente/componentes/SolicitarAyuda";
 import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
 import InfoCliente from "./AppAgente/componentes/InfoCliente";
@@ -18,7 +18,12 @@ function App() {
           <InfoCliente />
         </div>
         <div class="contenedor2">
+          {/* <ControlLlamada/> */}
           <EstatusLlamada />
+          <Estadistica/>
+          <SolicitarAyuda/>
+        </div>
+        <div class="contenedor3"></div>
           <Button className="botonEstadisticas">
             <h4>Estadísticas</h4>
           </Button>
@@ -29,7 +34,6 @@ function App() {
           <InterfazGuia/>
         </div>
       </div>
-    </div>
   );
 }
 

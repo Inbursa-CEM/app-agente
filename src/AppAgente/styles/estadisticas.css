@@ -1,0 +1,18 @@
+.botonEstadisticas{
+    width: 380px !important;
+    height: 50px !important;
+    background-color: #6164A9 !important;
+    color: rgb(245, 242, 242) !important;
+    margin-left: 8px !important;
+    border-radius: 10px !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  .botonEstadisticas:hover{
+    background-color: #9AB6FF !important;
+    color: #012148 !important;
+  }
+  
+  .botonEstadisticas h4{
+    font-size: 25px;
+  }
