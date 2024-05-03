@@ -33,7 +33,8 @@
 }
 
 .contenedor2 {
-  /* background-color: #aeb9c5; */
+  background-color: rgb(221, 232, 243); 
+  border-radius: 15px;
   height: 700px;
   width: 500px;
   overflow:auto;
