@@ -7,22 +7,14 @@
     font-weight: 500;
     font-size: 20px;
     text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .botonAyuda{
     width: 200px !important;
     height: 40px !important;
-    border-radius: 100px !important;
-    background-color: #E53434 !important;
-    margin-top: -10px !important;
-    color: white !important;
-    font-family: 'Poppins', sans-serif !important;
-}
-
-.botonAyuda{
-    width: 200px !important;
-    height: 40px !important;
-    border-radius: 100px !important;
+    border-radius: 15px !important;
     background-color: #E53434 !important;
     color: white !important;
     font-family: 'Poppins', sans-serif !important;

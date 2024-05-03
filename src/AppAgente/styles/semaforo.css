@@ -2,7 +2,7 @@
 .semaforo{
     display: flex;
     grid-gap: 8px;
-    margin-top: -10px;
+    margin-top: -8px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
