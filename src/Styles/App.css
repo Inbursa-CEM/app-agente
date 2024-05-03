@@ -27,20 +27,24 @@
 }
 
 .contenedor {
-  background-color: #4e8ad4;
+  /* background-color: #4e8ad4; */
   height: 350px;
+  width: 1000px;
 }
 
 .contenedor2 {
   /* background-color: #aeb9c5; */
   height: 700px;
+  width: 500px;
+  overflow:auto;
+  margin-left: -100px;
 }
 
 .contenedor3{
   margin-top: -350px;
-  background-color: #325b8c;
+  width: 1000px;
   height: 340px;
-  overflow:auto;
+  
 }
 
 .botonAzulMarino{
