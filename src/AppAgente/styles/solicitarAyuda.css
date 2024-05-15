@@ -2,19 +2,21 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 20px;
 }
 .solicitar h3{
+    color: black;
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .botonAyuda{
     width: 200px !important;
     height: 40px !important;
-    border-radius: 15px !important;
+    border-radius: 10px !important;
     background-color: #E53434 !important;
     color: white !important;
     font-family: 'Poppins', sans-serif !important;

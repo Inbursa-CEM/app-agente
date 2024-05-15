@@ -2,9 +2,6 @@ import EstatusLlamada from "./AppAgente/componentes/EstatusLlamada";
 import "./Styles/App.css";
 import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
 import InfoCliente from "./AppAgente/componentes/InfoCliente";
-// import Dashboard from "./App/Dashboard/dashboard";
-// import Monitoreo from "./App/TablaMonitoreo/monitoreo";
-// import Cursos from "./App/Cursos/cursos";
 // import { Route, Routes } from "react-router-dom";
 function App() {
 
