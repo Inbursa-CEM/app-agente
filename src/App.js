@@ -13,16 +13,16 @@ function App() {
     <div className="App">
       <div className="interfaz">
         <div className="contenedor">
-          <InfoCliente />
+          <EstatusLlamada />
         </div>
         <div className="contenedor2">
           <InterfazGuia/>
         </div>
         <div className="contenedor3">
-          <EstatusLlamada />
+          <InfoCliente />
         </div>
         <div className="contenedor4">
-          <Connect />
+          {/* <Connect /> */}
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import PauseSharpIcon from '@mui/icons-material/PauseSharp';
-import VolumeOffSharpIcon from '@mui/icons-material/VolumeOffSharp';
-import CallEndSharpIcon from '@mui/icons-material/CallEndSharp';
-import { Button } from '@mui/material';
+// import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+// import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+// import PauseSharpIcon from '@mui/icons-material/PauseSharp';
+// import VolumeOffSharpIcon from '@mui/icons-material/VolumeOffSharp';
+// import CallEndSharpIcon from '@mui/icons-material/CallEndSharp';
+// import { Button } from '@mui/material';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
 
@@ -30,7 +30,7 @@ const EstatusLlamada = () => {
 
     return (
         <div className='llamada'>
-            <div className='columnaE'>
+            {/* <div className='columnaE'>
                 <div className='estatus'>
                     <div className='columnat'>
                         <LocalPhoneIcon className='icon' />
@@ -48,7 +48,7 @@ const EstatusLlamada = () => {
                     <br></br>
                     <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
                 </div>
-            </div>
+            </div> */}
             <div className='columnaE'>
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
                 <div className='estado'>
@@ -63,7 +63,7 @@ const EstatusLlamada = () => {
                 <SolicitarAyuda/>
             </div>
         </div>
-        
+
     )
 }
 

@@ -27,9 +27,9 @@
 }
 
 .contenedor {
-  /* background-color: #4e8ad4; */
-  height: 700px;
-  width: 300px;
+  background-color: #4e8ad4;
+  height: 350px;
+  width: 305px;
   margin-left: 690px;
 }
 
@@ -43,10 +43,9 @@
 
 .contenedor3{
   margin-top: -350px;
-  width: 680px;
-  height: 335px;
+  width: 995px;
+  height: 305px;
   margin-left: -1px;
-  background-color: pink;
 }
 
 .contenedor4{
@@ -54,7 +53,6 @@
   width: 680px;
   height: 345px;
   background-color: black;
-  color: white;
   margin-left: -1110px;
 }
 
