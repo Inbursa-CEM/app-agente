@@ -12,6 +12,22 @@
     border-radius: 40px;
 }
 
+.semaforo .circuloVerde{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgba(92, 215, 78, 0.3);
+    padding: 4px;
+}
+
+.semaforo .circuloVerdeON{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgb(92, 215, 78);
+    padding: 4px;
+}
+
 .semaforo .circuloRojo{
     width: 35px;
     height: 35px;
@@ -44,19 +60,3 @@
     padding: 4px;
 }
 
-.semaforo .circuloVerde{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: rgba(92, 215, 78, 0.3);
-    padding: 4px;
-}
-
-
-.semaforo .circuloVerdeON{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: rgb(92, 215, 78);
-    padding: 4px;
-}
