@@ -5,7 +5,7 @@ import Datos from "./Datos";
 
 const Contenedor = () => {
   return (
-    <div className="contenedor">
+    <div className="container">
       <Datos
         datosCliente={{
           nombre: "Guillermo Morelos Ramírez",

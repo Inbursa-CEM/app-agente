@@ -28,8 +28,9 @@
 
 .contenedor {
   /* background-color: #4e8ad4; */
-  height: 350px;
-  width: 1000px;
+  height: 700px;
+  width: 300px;
+  margin-left: 690px;
 }
 
 .contenedor2 {
@@ -42,9 +43,19 @@
 
 .contenedor3{
   margin-top: -350px;
-  width: 1000px;
-  height: 340px;
-  
+  width: 680px;
+  height: 335px;
+  margin-left: -1px;
+  background-color: pink;
+}
+
+.contenedor4{
+  margin-top: -705px;
+  width: 680px;
+  height: 345px;
+  background-color: black;
+  color: white;
+  margin-left: -1110px;
 }
 
 .botonAzulMarino{

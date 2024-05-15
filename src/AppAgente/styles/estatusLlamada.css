@@ -31,7 +31,7 @@
     background: #08084ba5;
     padding: -10px;
     text-align: left;
-    padding-bottom: 10px; 
+    padding-bottom: 10px;
 }
 
 .icon {
@@ -60,7 +60,7 @@
     border-radius: 0px;
     text-align: left;
     padding: 5px;
-    
+
 }
 
 .columnat{
@@ -106,7 +106,7 @@
     padding: 2px;
     margin-top: 20px;
     margin-bottom: 20px;
-    
+
 }
 
 .callIcon{
@@ -146,7 +146,7 @@
     background-color: #012148 !important;
     color: #9AB6FF !important;
 }
-  
+
 .silenciar:hover{
     background-color: #012148 !important;
     color: #9AB6FF !important;

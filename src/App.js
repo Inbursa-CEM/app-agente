@@ -2,6 +2,7 @@ import EstatusLlamada from "./AppAgente/componentes/EstatusLlamada";
 import "./Styles/App.css";
 import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
 import InfoCliente from "./AppAgente/componentes/InfoCliente";
+// import Connect from "./AppAgente/componentes/Connect";
 // import Dashboard from "./App/Dashboard/dashboard";
 // import Monitoreo from "./App/TablaMonitoreo/monitoreo";
 // import Cursos from "./App/Cursos/cursos";
@@ -10,15 +11,19 @@ function App() {
 
   return (
     <div className="App">
-      <div class="interfaz">
-        <div class="contenedor">
+      {/* <Connect /> */}
+      <div className="interfaz">
+        <div className="contenedor">
           <InfoCliente />
         </div>
-        <div class="contenedor2">
+        <div className="contenedor2">
           <InterfazGuia/>
         </div>
-        <div class="contenedor3">
+        <div className="contenedor3">
           <EstatusLlamada />
+        </div>
+        <div className="contenedor4">
+          Connect
         </div>
       </div>
     </div>

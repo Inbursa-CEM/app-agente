@@ -10,22 +10,30 @@ const Llamadas = ({numLlamadas, listaLlamadas}) => {
     <div className="grupo">
       <div className="titulo"> Llamadas </div>
       <div className="objetoLlamadas">
-        <h4> Número de llamadas mensuales: {numLlamadas} </h4>
-        <div className="table-style">
-          {listaLlamadas.map((llamada) => (
-            <div className='elemLista'>
+        <div className="texto">
+          Número de llamadas mensuales: {numLlamadas}
+        </div>
+        <scroll-container>
+
+          {listaLlamadas.map((llamada, llamadaIndex) => (
+
+            <scroll-page>
+
+            <div className='elemLista' key={llamadaIndex}>
               <h5> {llamada.title} </h5>
               <h6> {llamada.description} </h6>
               <div className='calif'>
                 {[...Array(5)].map((_, starIndex) => (
-                    starIndex < llamada.stars ? <StarIcon style={{color: 'gold'}} /> : <StarBorderIcon />
+                    starIndex < llamada.stars ? <StarIcon key={starIndex} style={{color: 'gold'}} /> : <StarBorderIcon key={starIndex}/>
                 ))}
                 <div className='fecha'> {llamada.date} </div>
               </div>
-              <hr/>
             </div>
+            </scroll-page>
           ))}
-        </div>
+
+        </scroll-container>
+
       </div>
     </div>
   );
