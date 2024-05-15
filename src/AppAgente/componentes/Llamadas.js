@@ -15,11 +15,11 @@ const Llamadas = ({numLlamadas, listaLlamadas}) => {
         </div>
         <scroll-container>
 
-          {listaLlamadas.map((llamada, llamadaIndex) => (
+          {listaLlamadas.map((llamada) => (
 
             <scroll-page>
 
-            <div className='elemLista' key={llamadaIndex}>
+            <div className='elemLista' key={llamada.id}>
               <h5> {llamada.title} </h5>
               <h6> {llamada.description} </h6>
               <div className='calif'>
