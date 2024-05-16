@@ -7,6 +7,7 @@ import Semaforo from './Semaforo';
 // import VolumeOffSharpIcon from '@mui/icons-material/VolumeOffSharp';
 // import CallEndSharpIcon from '@mui/icons-material/CallEndSharp';
 // import { Button } from '@mui/material';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
 
@@ -49,8 +50,12 @@ const EstatusLlamada = () => {
                     <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
                 </div>
             </div> */}
+            
             <div className='columnaE'>
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
+                <div className='normal' id='tiempo'>
+                        <AccessTimeFilledIcon /> <h3> 1:57:03</h3>
+                    </div>
                 <div className='estado'>
                     <div className='columna'>
                         <div className='sentimiento'>
