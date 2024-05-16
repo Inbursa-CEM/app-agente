@@ -2,42 +2,51 @@ import "../styles/infoCliente.css";
 import Llamadas from "./Llamadas";
 import Transacciones from "./Transacciones";
 import Datos from "./Datos";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Contenedor = () => {
   const [cliente, setCliente] = useState([]);
-  const url = "http://localhost:8080/cliente/consultar?id=1";
+  const [tarjeta, setTarjeta] = useState([]);
+  const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
 
-  const descargar = useCallback(() => {
-    fetch(url)
+  useEffect(() => {
+    console.log("Descargando datos");
+    fetch(urlCliente)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos del servidor:", data);
+        console.log("Datos obtenidos del cliente:", data);
         const dataCliente = {
-          nombre: data.nombre,
-          telefono: data.telefono,
+          nombre: data[0].nombre,
+          telefono: data[0].telefono,
         };
         setCliente(dataCliente);
       })
       .catch((error) => console.log(error));
-  }, []);
 
-  useEffect(() => {
-    console.log("Descargando datos");
-    descargar();
-  }, [descargar]);
+    fetch(urlTarjeta)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos obtenidos de la tarjeta:", data);
+        const dataTarjeta = {
+          cuenta: data[0].numCuenta,
+          tipo: data[0].tipo,
+          saldo: data[0].saldo
+        };
+        setTarjeta(dataTarjeta);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="container">
       <Datos
         datosCliente={{
-          // nombre: "Guillermo Morelos Ramírez",
-          // telefono: "+52 1 55 1234 5678",
           nombre: cliente.nombre,
           telefono: cliente.telefono,
-          cuenta: "1234567890",
-          tarjeta: "Platino Express",
-          saldo: "$20,493.00",
+          cuenta: tarjeta.cuenta,
+          tarjeta: tarjeta.tipo,
+          saldo: "$" + tarjeta.saldo + ".00",
         }}
       />
       <Transacciones
