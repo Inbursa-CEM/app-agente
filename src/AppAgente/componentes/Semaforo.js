@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import '../styles/semaforo.css';
 
-const Semaforo = () => {
-    const [semaforoState, setSemaforoState] = useState('circuloVerdeON');
+const Semaforo = ({tiempo}) => {
+    // const [semaforoState, setSemaforoState] = useState('circuloVerdeON');
 
-    const cambiarColor = () => {
-        if (semaforoState === 'circuloRojoON') {
-            setSemaforoState('circuloAmarilloON');
-        } else if (semaforoState === 'circuloAmarilloON') {
-            setSemaforoState('circuloVerdeON');
+    // const cambiarColor = () => {
+    //     if (semaforoState === 'circuloRojoON') {
+    //         setSemaforoState('circuloAmarilloON');
+    //     } else if (semaforoState === 'circuloAmarilloON') {
+    //         setSemaforoState('circuloVerdeON');
+    //     } else {
+    //         setSemaforoState('circuloRojoON');
+    //     }
+    // };
+
+    const obtenerClaseSemaforo = () => {
+        if (tiempo < 46000) {
+            return 'circuloVerdeON'; // Iniciar en verde
+        } else if (tiempo >= 46000 && tiempo < 60000) {
+            return 'circuloAmarilloON';
         } else {
-            setSemaforoState('circuloRojoON');
+            return 'circuloRojoON';
         }
-    };
+    };    
 
-    return(
+    return (
         <div>
-            <div className='semaforo' onClick={cambiarColor}>
-                <div className={`circuloRojo ${semaforoState === 'circuloRojoON' ? 'circuloRojoON' : ''}`}></div>
-                <div className={`circuloAmarillo ${semaforoState === 'circuloAmarilloON' ? 'circuloAmarilloON' : ''}`}></div>
-                <div className={`circuloVerde ${semaforoState === 'circuloVerdeON' ? 'circuloVerdeON' : ''}`}></div>
+            <div className='semaforo'>
+                <div className={`circuloRojo ${obtenerClaseSemaforo() === 'circuloRojoON' ? 'circuloRojoON' : ''}`}></div>
+                <div className={`circuloAmarillo ${obtenerClaseSemaforo() === 'circuloAmarilloON' ? 'circuloAmarilloON' : ''}`}></div>
+                <div className={`circuloVerde ${obtenerClaseSemaforo() === 'circuloVerdeON' ? 'circuloVerdeON' : ''}`}></div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Semaforo;
+
  
