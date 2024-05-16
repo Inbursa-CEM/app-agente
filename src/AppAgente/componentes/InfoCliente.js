@@ -2,41 +2,11 @@ import "../styles/infoCliente.css";
 import Llamadas from "./Llamadas";
 import Transacciones from "./Transacciones";
 import Datos from "./Datos";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Contenedor = () => {
-  const [cliente, setCliente] = useState([]);
-  const [tarjeta, setTarjeta] = useState([]);
-  const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
-
-  useEffect(() => {
-    console.log("Descargando datos");
-    fetch(urlCliente)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Datos obtenidos del cliente:", data);
-        const dataCliente = {
-          nombre: data[0].nombre,
-          telefono: data[0].telefono,
-        };
-        setCliente(dataCliente);
-      })
-      .catch((error) => console.log(error));
-
-    fetch(urlTarjeta)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Datos obtenidos de la tarjeta:", data);
-        const dataTarjeta = {
-          cuenta: data[0].numCuenta,
-          tipo: data[0].tipo,
-          saldo: data[0].saldo
-        };
-        setTarjeta(dataTarjeta);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const [cliente, tarjeta, arrTransacciones] = useContext(ContextoInfo);
 
   return (
     <div className="container">
@@ -50,14 +20,8 @@ const Contenedor = () => {
         }}
       />
       <Transacciones
-        listaTransax={[
-          ["Pago Cuenta Terceros", "Movimiento Inbursa", "$-2,000.00"],
-          ["Spotify", "Movimiento Inbursa", "$-200.00"],
-          ["Enviado BBVA", "Transferencia interbancaria", "$-500.00"],
-          ["Pago Tarjeta de Crédito", "Movimiento Inbursa", "$-10,500.00"],
-          ["Pago Tarjeta de Crédito", "Movimiento Inbursa", "$-10,500.00"],
-          ["Spotify", "Movimiento Inbursa", "$-200.00"],
-        ]}
+        listaTransax={arrTransacciones}
+        // FALTANTE
         elementoDestacadoIndex={2}
       />
       <Llamadas
