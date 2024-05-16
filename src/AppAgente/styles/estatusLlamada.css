@@ -1,13 +1,13 @@
 .llamada{
     display: grid;
-    grid-template-columns: 470px 470px;
+    grid-template-columns: 290px 470px;
     grid-gap: 20px;
     /* justify-content: center; */
-    /* height: 500px; */
+    height: 310px;
     border-radius: 1px;
-    margin: 10px;
-    padding: 10px;
-    
+    margin: 1px;
+    margin-top: 8px;
+    padding: 8px;
 }
 
 .columnaE{
@@ -15,9 +15,9 @@
     align-content: center;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.149);
-    background-color:  #E3E1E8;
+    background-color: #E3E1E8;
     padding-bottom: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .llamada h3{
@@ -32,9 +32,7 @@
     background: rgba(2, 4, 58, 0.75);
     padding: -10px;
     text-align: left;
-    padding-bottom: 10px; 
-    border-radius: 10px;
-
+    padding-bottom: 10px;
 }
 
 .icon {
@@ -54,7 +52,7 @@
 
 #tiempo{
     display: flex;
-    margin-left:70px;
+    margin-left:100px;
     margin-bottom: 10px;
     font-weight: 400;
     font-size: 16px;
@@ -63,8 +61,8 @@
     color: white;
     border-radius: 0px;
     text-align: left;
-    padding: 5px;
-    
+    padding: 2px;
+
 }
 
 .columnat{
@@ -82,7 +80,7 @@
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    grid-template-columns: 180px 180px;
+    grid-template-columns: 100px 180px;
     grid-gap: 5px;
 }
 
@@ -92,7 +90,8 @@
 }
 
 .normal{
-    background-color: rgb(255, 200, 2)
+    background-color: rgb(255, 200, 2);
+    margin-top: -10px;
 }
 
 .bueno{
@@ -112,7 +111,7 @@
     padding: 2px;
     margin-top: 20px;
     margin-bottom: 20px;
-    
+
 }
 
 .callIcon{
@@ -152,7 +151,7 @@
     background-color: #012148 !important;
     color: #9AB6FF !important;
 }
-  
+
 .silenciar:hover{
     background-color: #012148 !important;
     color: #9AB6FF !important;
@@ -164,18 +163,16 @@
 }
 
 .labelEstado{
-    background-color: rgba(2, 4, 58, 0.75) !important;
     color: white;
     margin-top: -16px;
     margin-bottom: 20px;
-    padding: 1px;
-    border-radius: 30px;
-
+    border-radius: 10px;
+    background-color: rgba(2, 4, 58, 0.75) !important;;
 }
 
 .labelEstado h3{
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .estado{
