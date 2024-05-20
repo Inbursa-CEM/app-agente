@@ -13,7 +13,7 @@ const ProveedorInfoCliente = ({ children }) => {
   const urlTransacciones =
     "http://localhost:8080/transaccion/consultar?numCuenta=123456";
   const urlLlamadas = "http://localhost:8080/llamada/consultar";
-  const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas";
+  const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas?idUsuario=1";
 
   useEffect(() => {
     console.log("Descargando datos");
