@@ -1,7 +1,9 @@
 import '../styles/estadisticas.css'
 import React, { useState } from 'react'
 import { Button } from '@mui/material';
-
+import PromedioDuracionDia from './PromedioDuracionDia';
+import NumLlamadas from './NumLlamadas';
+import Satisfaccion from './Satisfaccion';
 
 const Estadisticas = () => {
 
@@ -40,16 +42,16 @@ const Estadisticas = () => {
                                 </div>
                             </div> */}
                             <div className='duracion'>
-                                <h3>Duración promedio de llamadas</h3>
-                                <canvas id='duracion'></canvas>
+                                <h3>Duración promedio de llamadas por día</h3>
+                                <PromedioDuracionDia/>
                             </div>  
                             <div className='llamadas'>
                                 <h3>Número de llamadas por día</h3>
-                                <canvas id='llamadas'></canvas>
+                                <NumLlamadas/>
                             </div>  
                             <div className='satisfaccion'>
-                                <h3>Satisfacción promedio por llamada</h3>
-                                <canvas id='satisfaccion'></canvas>
+                                <h3>Satisfacción promedio de llamadas por día</h3>
+                                <Satisfaccion/>
                             </div>  
                         </div>
                         <Button onClick={abrirModal} className="close-modal">Cerrar</Button>
