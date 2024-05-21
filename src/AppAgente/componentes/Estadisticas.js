@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button } from '@mui/material';
 import PromedioDuracionDia from './PromedioDuracionDia';
 import NumLlamadas from './NumLlamadas';
-import Satisfaccion from './Satisfaccion';
+import ProblemasResueltos from './ProblemaResuelto';
 
 const Estadisticas = () => {
 
@@ -41,17 +41,18 @@ const Estadisticas = () => {
                                     <canvas id='problemas'></canvas>
                                 </div>
                             </div> */}
-                            <div className='duracion'>
-                                <h3>Duración promedio de llamadas por día</h3>
-                                <PromedioDuracionDia/>
-                            </div>  
                             <div className='llamadas'>
                                 <h3>Número de llamadas por día</h3>
+                                <br></br>
                                 <NumLlamadas/>
                             </div>  
                             <div className='satisfaccion'>
-                                <h3>Satisfacción promedio de llamadas por día</h3>
-                                <Satisfaccion/>
+                                <h3>Efectividad de resolución de problemas</h3>
+                                <ProblemasResueltos/>
+                            </div>  
+                            <div className='duracion'>
+                                <h3>Duración promedio de llamadas por día</h3>
+                                <PromedioDuracionDia/>
                             </div>  
                         </div>
                         <Button onClick={abrirModal} className="close-modal">Cerrar</Button>

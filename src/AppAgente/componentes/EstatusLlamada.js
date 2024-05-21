@@ -86,7 +86,7 @@ const EstatusLlamada = () => {
 
     return (
         <div className='llamada'>
-            <div className='columnaE'>
+            {/* <div className='columnaE'>
                 <div className='estatus'>
                     <div className='columnat'>
                         <LocalPhoneIcon className='icon' />
@@ -104,7 +104,7 @@ const EstatusLlamada = () => {
                     <br></br>
                     <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
                 </div>
-            </div>
+            </div> */}
             <div className='columnaE'>
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
                 <div className='estado'>

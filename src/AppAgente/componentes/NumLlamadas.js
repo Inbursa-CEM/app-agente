@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';
 
 export default function PromedioDuracionDia(){
-    const [url, setUrl] = useState("http://192.168.1.247:8080/llamada/numLlamadas?idUsuario=2");
+    const [url, setUrl] = useState("http://10.48.109.113:8080/llamada/numLlamadas?idUsuario=2");
     const [numLlamadas, setNumLlamadas] = useState("");
     const [fecha, setFecha] = useState("");
 
@@ -19,6 +19,7 @@ export default function PromedioDuracionDia(){
 
         })
         .catch((error) => console.log(error));
+        console.log("hubo un problema")
     }, [url]); // Incluir url en la lista de dependencias para que useCallback lo actualice si cambia
 
     useEffect(() => {

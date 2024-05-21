@@ -23,7 +23,7 @@
 }
 
 .circulo {
-    background-color: rgba(59, 59, 252, 0.342);
+    background-color: rgba(59, 126, 252, 0.163);
     border-radius: 50%; /* Hace que el div tenga forma de círculo */
     width: 180px; /* Tamaño del círculo */
     height: 180px; /* Tamaño del círculo */
