@@ -29,11 +29,13 @@
 .contenedor {
   /* background-color: #4e8ad4; */
   height: 350px;
-  width: 1000px;
+  width: 305px;
+  margin-left: 690px;
 }
 
 .contenedor2 {
-  /* background-color: #aeb9c5; */
+  background-color: rgb(221, 232, 243);
+  border-radius: 15px;
   height: 700px;
   width: 500px;
   overflow:auto;
@@ -42,9 +44,16 @@
 
 .contenedor3{
   margin-top: -350px;
-  width: 1000px;
-  height: 340px;
-  
+  width: 995px;
+  height: 305px;
+  margin-left: -1px;
+}
+
+.contenedor4{
+  margin-top: -705px;
+  width: 680px;
+  height: 345px;
+  margin-left: -1110px;
 }
 
 .botonAzulMarino{
