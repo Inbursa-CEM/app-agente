@@ -14,19 +14,17 @@ const Llamadas = ({numLlamadas, listaLlamadas}) => {
           Número de llamadas mensuales: {numLlamadas}
         </div>
         <scroll-container>
-
-          {listaLlamadas.map((llamada) => (
-
-            <scroll-page>
+          {listaLlamadas.map((llamada, index) => (
+            <scroll-page key={index}>
 
             <div className='elemLista' key={llamada.id}>
-              <h5> {llamada.title} </h5>
-              <h6> {llamada.description} </h6>
+              <h5> {llamada.tema} </h5>
+              <h6> {llamada.motivo} </h6>
               <div className='calif'>
                 {[...Array(5)].map((_, starIndex) => (
                     starIndex < llamada.stars ? <StarIcon key={starIndex} style={{color: 'gold'}} /> : <StarBorderIcon key={starIndex}/>
                 ))}
-                <div className='fecha'> {llamada.date} </div>
+                <div className='fecha'> {llamada.fecha} </div>
               </div>
             </div>
             </scroll-page>

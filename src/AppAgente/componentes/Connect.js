@@ -45,12 +45,14 @@ const Connect = () => {
         console.log(cid);
         var attributeMap = contact.getAttributes();
         console.log(attributeMap);
+        // var number = contact.getAttributes().customerNumber;
+        // console.log("NUMERO" + number);
       });
     });
 
   }, []);
 
-  return <div id="ccp" style={{ width: "680px", height: "340px" }}></div>;
+  return <div id="ccp" style={{ width: "680px", height: "350px" }}></div>;
 };
 
 export default Connect;
