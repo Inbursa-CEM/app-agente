@@ -106,7 +106,7 @@ const EstatusLlamada = () => {
                     <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
                 </div>
             </div> */}
-            
+
             <div className='columnaE'>
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
                 <div className='normal' id='tiempo'>

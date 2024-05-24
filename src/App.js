@@ -13,7 +13,7 @@ function App() {
           <EstatusLlamada />
         </div>
         <div className="contenedor2">
-          <InterfazGuia />
+          <InterfazGuia/>
         </div>
         <div className="contenedor3">
           <ProveedorInfoCliente>

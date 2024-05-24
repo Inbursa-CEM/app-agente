@@ -85,9 +85,13 @@ grid-template-columns: 50% 50%;
 
 .duracion h3, .llamadas h3, .satisfaccion h3{
   padding: 10px;
-  background-color: #9AB6FF;
+  background-color:  rgba(2, 4, 58, 0.75);
   font-weight: 600;
   font-size: 18px;
+}
+
+.pie{
+  margin-left: -140px;
 }
 
 .close-modal {
