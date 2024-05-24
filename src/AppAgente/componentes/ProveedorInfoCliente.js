@@ -8,8 +8,10 @@ const ProveedorInfoCliente = ({ children }) => {
   const [arrTransacciones, setTransacciones] = useState([]);
   const [arrLlamadas, setLlamadas] = useState([]);
   const [numLlamadas, setNumLlamadas] = useState([]);
-  const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
+  // const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
+  const urlCliente = "http://localhost:8080/cliente/consultar?telefono=52205512345678"
+  // const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/1";
   const urlTransacciones =
     "http://localhost:8080/transaccion/consultar?numCuenta=123456";
   const urlLlamadas = "http://localhost:8080/llamada/consultar";
@@ -34,9 +36,9 @@ const ProveedorInfoCliente = ({ children }) => {
       .then((data) => {
         console.log("Datos obtenidos de la tarjeta:", data);
         const dataTarjeta = {
-          cuenta: data[0].numCuenta,
-          tipo: data[0].tipo,
-          saldo: data[0].saldo,
+          cuenta: data.numCuenta,
+          tipo: data.tipo,
+          saldo: data.saldo,
         };
         setTarjeta(dataTarjeta);
       })
