@@ -16,7 +16,7 @@ import feliz from '../images/feliz.PNG';
 import normal from '../images/normal.PNG';
 import enojado from '../images/enojado.PNG';
 
-const EstatusLlamada = () => {
+const EstatusLlamada = ({contactId}) => {
     const [sentimiento, setSentimiento] = useState(normal);
 
     const [tiempo, setTiempo] = useState(0);
