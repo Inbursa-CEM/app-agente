@@ -1,123 +1,112 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
-// import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-// import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-// import PauseSharpIcon from '@mui/icons-material/PauseSharp';
-// import VolumeOffSharpIcon from '@mui/icons-material/VolumeOffSharp';
-// import CallEndSharpIcon from '@mui/icons-material/CallEndSharp';
-// import { Button } from '@mui/material';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
-
-
 import feliz from '../images/feliz.PNG';
 import normal from '../images/normal.PNG';
 import enojado from '../images/enojado.PNG';
 
-const EstatusLlamada = ({contactId}) => {
+//const [tiempo, setTiempo] = useState(0);
+// const [corriendo, setCorriendo] = useState(false);
+
+const EstatusLlamada = ({contactClientId}) => {
+    //, time, setTime
+
+    //Obtener transcripcion
+    const [url] = useState("http:192.168.1.70//:8080/llamada/transcripcion(contacID)");
     const [sentimiento, setSentimiento] = useState(normal);
 
-    const [tiempo, setTiempo] = useState(0);
-    const [corriendo, setCorriendo] = useState(false);
-
-    const cambiarSentimiento = () => {
-        if (sentimiento === feliz) {
+    //Descargar la transcripcion checar su funcionamiento
+    const descargar = useCallback(async () => {
+        try {
+          const response = await fetch(url);
+          const data  = await response.json();
+          const arrNuevo = data[0].Segments.map((segment) => {
+            const sentimiento = {
+            //   id: uuidv4(),
+              sentiment: segment.Transcript.Sentiment,
+            };
+            return sentimiento;
+          });
+         
+          setSentimiento(sentimiento);
+        } catch (error) {
+          console.error('Error al descargar los datos:', error);
+        }
+      }, [url]);
+    
+    //Cambia el sentimiento de la llamada acada que se actualizan los datos
+    const cambiarSentimiento = useCallback(() => {
+        if (sentimiento === "NEUTRAL") {
             setSentimiento(normal);
-        } else if (sentimiento === normal) {
+        } else if (sentimiento === "NEGATIVE") {
             setSentimiento(enojado);
-        } else {
+        } else if (sentimiento === "POSITIVE"){
             setSentimiento(feliz);
+        }else{
+            setSentimiento(null);
         }
-    };
+    }, [sentimiento]);  
 
-    const toggleContador = () => {
-        setCorriendo(!corriendo);
-        // setTiempo(0); // Reiniciar el tiempo cuando se inicia el contador
-    };
-    
+    //UseEffect que descarga los json cada 3 segundos
     useEffect(() => {
-        let intervalId;
-    
-        if (corriendo) {
-            intervalId = setInterval(() => {
-                setTiempo(tiempo => tiempo + 10); 
-            }, 10); 
-        } else {
-            clearInterval(intervalId);
-        }
-    
-        return () => clearInterval(intervalId);
-    }, [corriendo]);
-    
-    const tiempoFormateado = () => {
-        const minutos = Math.floor(tiempo / 60000);
-        const segundos = Math.floor((tiempo % 60000) / 1000);
-    
-        const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
-        const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
-    
-        return `${formatMinutos}:${formatSegundos}`;
-    };
+        const interval = setInterval(descargar, 3000); // Descargar cada 3 segundos
+        return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
+    }, [descargar]);
 
-    const obtenerClaseTiempo = () => {
-        if (tiempo < 46000) {
-            return 'bueno';
-        } else if (tiempo >= 46000 && tiempo < 60000) {
-            return 'normal';
-        } else {
-            return 'malo';
-        }
-    };
+    //UseEffect que ayuda a descargar el sentimiento cada 5 segundos
+    useEffect(() => {
+        const interval = setInterval(cambiarSentimiento, 5000); // Cambiar sentimiento cada 5 segundos
+        return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
+    }, [cambiarSentimiento]);
 
-    //Solicitar el numero de telefono
-    // const descargar = useCallback(
-    //     () => {
-    //       console.log("Descargando datos");
-    //       fetch('/api')
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //       //Manejo de datos
-    //       })
-    //       .catch((error) => console.log(error));
-    //     },);
+    //UseEffect que se mantiene al tanto cada que se obtiene un contactId para 
+    //inicializar el contador
+    // useEffect(() => {
+    //     console.log("Contact Event - Contact Id from useEffect:", contactID)
 
-    //Solicitar el sentimiento de connect
+    //     if (contactID !== null && time === 0){
+    //         console.log('Contact ID not null, trying to fetch info');
+    //         const interval = setInterval(()=>{
+    //             setTime(prevTime => prevTime + 1);
+    //             }, 1000);
+    //         return() => clearInterval(interval);
+
+    //     }else{
+    //         console.log('Contact ID null');
+    //         setTime(0);
+    //     }
+    // }, [contactID, time]);
+    
+    // const tiempoFormateado = () => {
+    //     const minutos = Math.floor(time / 60000);
+    //     const segundos = Math.floor((time % 60000) / 1000);
+    
+    //     const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
+    //     const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
+    
+    //     return `${formatMinutos}:${formatSegundos}`;
+    // };
 
     return (
         <div className='llamada'>
-            {/* <div className='columnaE'>
-                <div className='estatus'>
-                    <div className='columnat'>
-                        <LocalPhoneIcon className='icon' />
-                        <h3 className='tel' id='tel'>+52 5577499543</h3>
-                    </div>
-                    <div className={`${obtenerClaseTiempo()}`} id='tiempo' onClick={toggleContador}>
-                        <AccessTimeFilledIcon /> <h3>{tiempoFormateado(tiempo)}</h3>
-                    </div>
-                </div>
-                <div className='control'>
-                    <div className='columna'>
-                        <Button className='espera'> <PauseSharpIcon className='callIcon' /> Espera</Button>
-                        <Button className='silenciar'><VolumeOffSharpIcon className='callIcon' /> Silenciar</Button>
-                    </div>
-                    <br></br>
-                    <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
-                </div>
-            </div> */}
-
             <div className='columnaE'>
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
+                {/* Colocar el contador que mencionó Gus */}
                 <div className='normal' id='tiempo'>
-                        <AccessTimeFilledIcon /> <h3> 1:57:03</h3>
+                        <AccessTimeFilledIcon /> <h3>{contactClientId}</h3>
+                        {/* <AccessTimeFilledIcon /> <h3>{tiempoFormateado()}</h3> */}
                     </div>
+                
                 <div className='estado'>
                     <div className='columna'>
                         <div className='sentimiento'>
                             <img src={sentimiento} alt="sentimiento" className='sentimiento' onClick={cambiarSentimiento} />
                         </div>
-                        <Semaforo tiempo={tiempo} />                    </div>
+                        {/* <Semaforo tiempo={tiempo} /> */}
+                    </div>
                 </div>
                 <SolicitarAyuda/>
                 <Estadistica/>
