@@ -21,9 +21,6 @@ const ProveedorInfoCliente = ({ children }) => {
   const urlNumLlamadas =
     "http://localhost:8080/llamada/numLlamadasCliente/" + cell;
 
-  console.log("GRUPO ", grupoTransax);
-  console.log("TRANSAX ", transax);
-
   useEffect(() => {
     console.log("Descargando datos");
     fetch(urlCliente)

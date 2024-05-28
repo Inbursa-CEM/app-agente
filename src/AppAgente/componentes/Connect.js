@@ -46,7 +46,7 @@ const Connect = () => {
         let cid = contact.getContactId();
         console.log(cid);
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
-        console.log("Número de telefono: ", number);
+        // console.log("Número de telefono: ", number);
         setCell(number);
       });
     });
