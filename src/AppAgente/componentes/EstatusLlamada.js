@@ -11,27 +11,59 @@ import enojado from '../images/enojado.PNG';
 //const [tiempo, setTiempo] = useState(0);
 // const [corriendo, setCorriendo] = useState(false);
 
-const EstatusLlamada = ({contactClientId}) => {
+const EstatusLlamada = ({contactId}) => {
     //, time, setTime
 
     //Obtener transcripcion
-    const [url] = useState("http:192.168.1.70//:8080/llamada/transcripcion(contacID)");
+    const [url] = useState(`http://10.48.109.113:8080/llamada/transcripcion/${contactId}`);
     const [sentimiento, setSentimiento] = useState(normal);
+    const [lastSentimiento, setLastSentimiento] = useState("NEUTRAL")
+    // const [contenido, setContenido] =  useEffect(null);
+
+    //UseEffect que se mantiene al tanto cada que se obtiene un contactId para 
+    //inicializar el contador
+    useEffect(() => {
+        console.log("Contact Event - Contact Id from useEffect:", contactId)
+
+        if (contactId !== null){
+            console.log('Contact ID not null, trying to fetch info');
+            // const interval = setInterval(()=>{
+            //     setTime(prevTime => prevTime + 1);
+            //     }, 1000);
+            // return() => clearInterval(interval);
+
+        }else{
+            console.log('Contact ID null');
+            // setTime(0);
+        }
+    }, [contactId]);
 
     //Descargar la transcripcion checar su funcionamiento
     const descargar = useCallback(async () => {
         try {
           const response = await fetch(url);
+          console.log(url)
           const data  = await response.json();
-          const arrNuevo = data[0].Segments.map((segment) => {
-            const sentimiento = {
-            //   id: uuidv4(),
-              sentiment: segment.Transcript.Sentiment,
-            };
-            return sentimiento;
-          });
+          console.log('Data recibida del endpoint', data)
+          const sentiments = data[0]?.Segments.map(segment => segment.Transcript.Sentiment);
+            // Use the last sentiment from the array, or 'NEUTRAL' if no data is available
+          console.log("El arreglo de sentimientos es:", sentiments)
+          const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
+          setSentimiento(latestSentiment);
+        //   const arrNuevo = data[0].Segments.map((segment) => {
+        //     const sentimiento = {
+        //       sentiment: segment.Transcript.Sentiment,
+        //     };
+            // const contenido = {
+            //     content: segment.Transcript.Content
+            // }
+            // return sentimiento;//contenido
+        //   });
          
-          setSentimiento(sentimiento);
+        //   setSentimiento(sentimiento);
+        //   setContenido(contenido);
+          console.log('El lastSentiment del arreglo:', latestSentiment)
+          console.log('El sentimiento al final es', sentimiento)
         } catch (error) {
           console.error('Error al descargar los datos:', error);
         }
@@ -46,11 +78,18 @@ const EstatusLlamada = ({contactClientId}) => {
         } else if (sentimiento === "POSITIVE"){
             setSentimiento(feliz);
         }else{
-            setSentimiento(null);
+            setSentimiento(normal);
         }
     }, [sentimiento]);  
 
     //UseEffect que descarga los json cada 3 segundos
+    // useEffect(() => {
+    //     // Verificar si contactId es null antes de llamar a descargar
+    //     if (contactId !== null) {
+    //         const interval = setInterval(descargar, 3000); // Descargar cada 3 segundos
+    //         return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
+    //     }
+    // }, [contactId, descargar]);
     useEffect(() => {
         const interval = setInterval(descargar, 3000); // Descargar cada 3 segundos
         return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
@@ -61,24 +100,6 @@ const EstatusLlamada = ({contactClientId}) => {
         const interval = setInterval(cambiarSentimiento, 5000); // Cambiar sentimiento cada 5 segundos
         return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
     }, [cambiarSentimiento]);
-
-    //UseEffect que se mantiene al tanto cada que se obtiene un contactId para 
-    //inicializar el contador
-    // useEffect(() => {
-    //     console.log("Contact Event - Contact Id from useEffect:", contactID)
-
-    //     if (contactID !== null && time === 0){
-    //         console.log('Contact ID not null, trying to fetch info');
-    //         const interval = setInterval(()=>{
-    //             setTime(prevTime => prevTime + 1);
-    //             }, 1000);
-    //         return() => clearInterval(interval);
-
-    //     }else{
-    //         console.log('Contact ID null');
-    //         setTime(0);
-    //     }
-    // }, [contactID, time]);
     
     // const tiempoFormateado = () => {
     //     const minutos = Math.floor(time / 60000);
@@ -96,18 +117,21 @@ const EstatusLlamada = ({contactClientId}) => {
                 <div className='labelEstado'><h3>Estado de llamada</h3></div>
                 {/* Colocar el contador que mencionó Gus */}
                 <div className='normal' id='tiempo'>
-                        <AccessTimeFilledIcon /> <h3>{contactClientId}</h3>
+                        <AccessTimeFilledIcon /> <h3>{contactId}</h3>
                         {/* <AccessTimeFilledIcon /> <h3>{tiempoFormateado()}</h3> */}
                     </div>
                 
                 <div className='estado'>
                     <div className='columna'>
-                        <div className='sentimiento'>
-                            <img src={sentimiento} alt="sentimiento" className='sentimiento' onClick={cambiarSentimiento} />
-                        </div>
+                        {sentimiento !== "NEUTRAL" && (
+                            <div className='sentimiento'>
+                                <img src={sentimiento} alt="sentimiento" className='sentimiento'/>
+                            </div>
+                        )}
                         {/* <Semaforo tiempo={tiempo} /> */}
                     </div>
                 </div>
+                {/* <h4>{contenido}</h4> */}
                 <SolicitarAyuda/>
                 <Estadistica/>
             </div>

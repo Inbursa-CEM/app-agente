@@ -6,9 +6,8 @@ import Connect from "./AppAgente/componentes/Connect";
 import ProveedorInfoCliente from "./AppAgente/componentes/ProveedorInfoCliente";
 import React, { useState} from 'react';
 
-
 function App() {
-  const [contactId, setContactId] = useState('skadkja');
+  const [contactId, setContactId] = useState(null);
   return (
     <div className="App">
       <div className="interfaz">
@@ -27,7 +26,8 @@ function App() {
         </div>
         <div className="contenedor4">
           <Connect
-          setContactId = {setContactId} />
+          setContactId = {setContactId} 
+          />
           </div>
       </div>
     </div>
