@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Contenedor = () => {
-  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas] =
+  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas, ] =
     useContext(ContextoInfo);
 
   return (

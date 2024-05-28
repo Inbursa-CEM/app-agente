@@ -15,12 +15,12 @@ function App() {
         <div className="contenedor2">
           <InterfazGuia/>
         </div>
+        <ProveedorInfoCliente>
         <div className="contenedor3">
-          <ProveedorInfoCliente>
             <InfoCliente />
-          </ProveedorInfoCliente>
         </div>
         <div className="contenedor4"> <Connect /> </div>
+        </ProveedorInfoCliente>
       </div>
     </div>
   );

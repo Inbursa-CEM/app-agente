@@ -3,20 +3,19 @@ import { createContext, useState, useEffect } from "react";
 export const ContextoInfo = createContext(); // Espacio global
 
 const ProveedorInfoCliente = ({ children }) => {
-  const cellphone = "+525540287603";
-
+  const [cell, setCell] = useState("");
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
   const [arrLlamadas, setArrLlamadas] = useState([]);
   const [numLlamadas, setNumLlamadas] = useState(0);
-  const urlCliente = "http://localhost:8080/cliente/consultar/" + cellphone;
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cellphone;
+  const urlCliente = "http://localhost:8080/cliente/consultar/" + cell;
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cell;
   const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar/" + cellphone;
-  const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cellphone;
+    "http://localhost:8080/transaccion/consultar/" + cell;
+  const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cell;
   const urlNumLlamadas =
-    "http://localhost:8080/llamada/numLlamadasCliente/" + cellphone;
+    "http://localhost:8080/llamada/numLlamadasCliente/" + cell;
 
   useEffect(() => {
     console.log("Descargando datos");
@@ -99,11 +98,11 @@ const ProveedorInfoCliente = ({ children }) => {
         setNumLlamadas(contador);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [urlCliente]);
 
   return (
     <ContextoInfo.Provider
-      value={[cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas]}
+      value={[cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas, setCell]}
     >
       {children}
     </ContextoInfo.Provider>
