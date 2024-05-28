@@ -20,7 +20,7 @@ function App() {
             <InfoCliente />
           </ProveedorInfoCliente>
         </div>
-        {/* <div className="contenedor4"><Connect /></div> */}
+        <div className="contenedor4"> <Connect /> </div>
       </div>
     </div>
   );

@@ -3,19 +3,20 @@ import { createContext, useState, useEffect } from "react";
 export const ContextoInfo = createContext(); // Espacio global
 
 const ProveedorInfoCliente = ({ children }) => {
+  const cellphone = "+525540287603";
+
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
   const [arrLlamadas, setArrLlamadas] = useState([]);
   const [numLlamadas, setNumLlamadas] = useState(0);
-  const urlCliente = "http://localhost:8080/cliente/consultar/+525540287603";
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/+525540287603";
+  const urlCliente = "http://localhost:8080/cliente/consultar/" + cellphone;
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cellphone;
   const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar/+525540287603";
-  const urlLlamadas = "http://localhost:8080/llamada/consultar/+525540287603";
-  // const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas/1";
+    "http://localhost:8080/transaccion/consultar/" + cellphone;
+  const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cellphone;
   const urlNumLlamadas =
-    "http://localhost:8080/llamada/numLlamadasCliente/+525540287603";
+    "http://localhost:8080/llamada/numLlamadasCliente/" + cellphone;
 
   useEffect(() => {
     console.log("Descargando datos");
