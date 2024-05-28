@@ -1,8 +1,10 @@
 import "amazon-connect-streams";
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Connect = () => {
-  //Variables to assing the call id and the status of the call
+  // Contexto de proveedor de información
+  const [ , , , , , setCell, , ] = useContext(ContextoInfo);
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -43,10 +45,9 @@ const Connect = () => {
       contact.onConnected(async function (contact) {
         let cid = contact.getContactId();
         console.log(cid);
-        var attributeMap = contact.getAttributes();
-        console.log(attributeMap);
-        // var number = contact.getAttributes().customerNumber;
-        // console.log("NUMERO" + number);
+        const number = contact.getInitialConnection().getEndpoint().phoneNumber;
+        // console.log("Número de telefono: ", number);
+        setCell(number);
       });
     });
 
