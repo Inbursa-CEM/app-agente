@@ -4,7 +4,7 @@ import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Connect = () => {
   // Contexto de proveedor de información
-  const [ , , , , , setCell] = useContext(ContextoInfo);
+  const [ , , , , , setCell, , ] = useContext(ContextoInfo);
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {

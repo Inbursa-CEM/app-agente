@@ -7,22 +7,29 @@ const ProveedorInfoCliente = ({ children }) => {
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
+  const [grupoTransax, setGrupoTransax] = useState([]);
+  const [transax, setTransax] = useState([]);
   const [arrLlamadas, setArrLlamadas] = useState([]);
   const [numLlamadas, setNumLlamadas] = useState(0);
   const urlCliente = "http://localhost:8080/cliente/consultar/" + cell;
   const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cell;
   const urlTransacciones =
     "http://localhost:8080/transaccion/consultar/" + cell;
+  const urlOneTransax =
+    "http://localhost:8080/transaccion/transax/" + cell;
   const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cell;
   const urlNumLlamadas =
     "http://localhost:8080/llamada/numLlamadasCliente/" + cell;
+
+  console.log("GRUPO ", grupoTransax);
+  console.log("TRANSAX ", transax);
 
   useEffect(() => {
     console.log("Descargando datos");
     fetch(urlCliente)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos del cliente:", data);
+        // console.log("Datos obtenidos del cliente:", data);
         const dataCliente = {
           nombre: data.nombre,
           telefono: data.telefono,
@@ -34,7 +41,7 @@ const ProveedorInfoCliente = ({ children }) => {
     fetch(urlTarjeta)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de la tarjeta:", data);
+        // console.log("Datos obtenidos de la tarjeta:", data);
         const dataTarjeta = {
           cuenta: data.numCuenta,
           tipo: data.tipo,
@@ -47,7 +54,7 @@ const ProveedorInfoCliente = ({ children }) => {
     fetch(urlTransacciones)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de las transacciones:", data);
+        // console.log("Datos obtenidos de las transacciones:", data);
         const arrNuevo = data.map((transax) => {
           const transaccion = [
             transax.nombre,
@@ -57,13 +64,22 @@ const ProveedorInfoCliente = ({ children }) => {
           return transaccion;
         });
         setTransacciones(arrNuevo);
+        setGrupoTransax(data);
+      })
+      .catch((error) => console.log(error));
+
+    fetch(urlOneTransax)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("Transacción requerida:", data);
+        setTransax(data);
       })
       .catch((error) => console.log(error));
 
     fetch(urlLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de las llamadas:", data);
+        // console.log("Datos obtenidos de las llamadas:", data);
         const arrNuevo = [];
         data.forEach((item) => {
           item.llamadas.forEach((llamada) => {
@@ -102,7 +118,16 @@ const ProveedorInfoCliente = ({ children }) => {
 
   return (
     <ContextoInfo.Provider
-      value={[cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas, setCell]}
+      value={[
+        cliente,
+        tarjeta,
+        arrTransacciones,
+        arrLlamadas,
+        numLlamadas,
+        setCell,
+        grupoTransax,
+        transax
+      ]}
     >
       {children}
     </ContextoInfo.Provider>
