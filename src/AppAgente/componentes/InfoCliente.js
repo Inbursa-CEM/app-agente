@@ -6,11 +6,15 @@ import { useContext } from "react";
 import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Contenedor = () => {
-  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas] =
+  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas, , grupoTransax, transax] =
     useContext(ContextoInfo);
+  let indice = 0;
 
-  // MODIFICAR
-  const numCalls = arrLlamadas.length;
+  for (let i = 0; i < grupoTransax.length; i++) {
+    if (grupoTransax[i].idTransaccion === transax.idTransaccion) {
+      indice = i;
+    }
+  }
 
   return (
     <div className="container">
@@ -25,10 +29,9 @@ const Contenedor = () => {
       />
       <Transacciones
         listaTransax={arrTransacciones}
-        // FALTANTE
-        elementoDestacadoIndex={2}
+        elementoDestacadoIndex={indice}
       />
-      <Llamadas numLlamadas={numCalls} listaLlamadas={arrLlamadas} />
+      <Llamadas numLlamadas={numLlamadas} listaLlamadas={arrLlamadas} />
     </div>
   );
 };
