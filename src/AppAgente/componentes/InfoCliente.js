@@ -9,9 +9,6 @@ const Contenedor = () => {
   const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas] =
     useContext(ContextoInfo);
 
-  // MODIFICAR
-  const numCalls = arrLlamadas.length;
-
   return (
     <div className="container">
       <Datos
@@ -28,7 +25,7 @@ const Contenedor = () => {
         // FALTANTE
         elementoDestacadoIndex={2}
       />
-      <Llamadas numLlamadas={numCalls} listaLlamadas={arrLlamadas} />
+      <Llamadas numLlamadas={numLlamadas} listaLlamadas={arrLlamadas} />
     </div>
   );
 };

@@ -43,10 +43,8 @@ const Connect = () => {
       contact.onConnected(async function (contact) {
         let cid = contact.getContactId();
         console.log(cid);
-        var attributeMap = contact.getAttributes();
-        console.log(attributeMap);
-        // var number = contact.getAttributes().customerNumber;
-        // console.log("NUMERO" + number);
+        const number = contact.getInitialConnection().getEndpoint().phoneNumber;
+        console.log("Número de telefono: ", number);
       });
     });
 

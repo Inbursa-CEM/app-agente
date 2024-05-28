@@ -6,16 +6,16 @@ const ProveedorInfoCliente = ({ children }) => {
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
-  const [arrLlamadas, setLlamadas] = useState([]);
-  const [numLlamadas, setNumLlamadas] = useState([]);
-  // const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
-  const urlCliente = "http://localhost:8080/cliente/consultar?telefono=52205512345678"
-  // const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/1";
+  const [arrLlamadas, setArrLlamadas] = useState([]);
+  const [numLlamadas, setNumLlamadas] = useState(0);
+  const urlCliente = "http://localhost:8080/cliente/consultar/+525540287603";
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/+525540287603";
   const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar?numCuenta=123456";
-  const urlLlamadas = "http://localhost:8080/llamada/consultar";
-  const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas?idUsuario=1";
+    "http://localhost:8080/transaccion/consultar/+525540287603";
+  const urlLlamadas = "http://localhost:8080/llamada/consultar/+525540287603";
+  // const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas/1";
+  const urlNumLlamadas =
+    "http://localhost:8080/llamada/numLlamadasCliente/+525540287603";
 
   useEffect(() => {
     console.log("Descargando datos");
@@ -24,8 +24,8 @@ const ProveedorInfoCliente = ({ children }) => {
       .then((data) => {
         console.log("Datos obtenidos del cliente:", data);
         const dataCliente = {
-          nombre: data[0].nombre,
-          telefono: data[0].telefono,
+          nombre: data.nombre,
+          telefono: data.telefono,
         };
         setCliente(dataCliente);
       })
@@ -64,29 +64,38 @@ const ProveedorInfoCliente = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Datos obtenidos de las llamadas:", data);
-        const arrNuevo = data.map((llamada) => {
-          const call = {
-            tema: llamada.tema,
-            motivo: llamada.motivo,
-            fecha:
-              llamada.fechaInicio.substring(8, 10) +
-              "/" +
-              llamada.fechaInicio.substring(5, 7) +
-              "/" +
-              llamada.fechaInicio.substring(0, 4),
-            stars: llamada.nivelSatisfaccion,
-          };
-          return call;
+        const arrNuevo = [];
+        data.forEach((item) => {
+          item.llamadas.forEach((llamada) => {
+            const call = {
+              tema: llamada.tema,
+              motivo: llamada.motivo,
+              fecha: `${llamada.fechaInicio.substring(
+                8,
+                10
+              )}/${llamada.fechaInicio.substring(
+                5,
+                7
+              )}/${llamada.fechaInicio.substring(0, 4)}`,
+              stars: llamada.nivelSatisfaccion,
+            };
+            arrNuevo.push(call);
+          });
         });
-        setLlamadas(arrNuevo);
+        setArrLlamadas(arrNuevo);
       })
       .catch((error) => console.log(error));
 
     fetch(urlNumLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Número de llamadas en el mes:", data);
-        setNumLlamadas(data);
+        let contador = 0;
+        data.forEach((item) => {
+          if (item.numllamadas === 1) {
+            contador++;
+          }
+        });
+        setNumLlamadas(contador);
       })
       .catch((error) => console.log(error));
   }, []);
