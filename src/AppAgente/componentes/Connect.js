@@ -1,7 +1,7 @@
 import "amazon-connect-streams";
 import React, { useEffect } from 'react';
 
-const Connect = ({ setContactId }) => {
+const Connect = ({ setContactId, setTime }) => {
   //Variables to assing the call id and the status of the call
 
   // Code to embed the Amazon Connect CCP
@@ -49,6 +49,13 @@ const Connect = ({ setContactId }) => {
         console.log(attributeMap);
         // var number = contact.getAttributes().customerNumber;
         // console.log("NUMERO" + number);
+      });
+      
+      //Cuando la llamada termine se deben de restablecer los parametros
+      //Es mas importante que se reinicie el tiempo, mas que contact
+      contact.onEnded(async function (contact){
+        setContactId(null)
+        setTime(0)
       });
     });
 

@@ -32,6 +32,7 @@ function App() {
         <div className="contenedor4">
           <Connect
           setContactId = {setContactId} 
+          setTime={setTime}
           />
           </div>
       </div>
