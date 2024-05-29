@@ -14,7 +14,7 @@ const sentimientoImagenes = {
     NEGATIVE: enojado,
   };
 
-const EstatusLlamada = ({contactId}) => {
+const EstatusLlamada = ({contactId, time, setTime}) => {
     //, time, setTime
     //const [tiempo, setTiempo] = useState(0);
     // const [corriendo, setCorriendo] = useState(false);
