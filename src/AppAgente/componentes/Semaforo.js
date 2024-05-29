@@ -2,18 +2,7 @@
 import '../styles/semaforo.css';
 
 const Semaforo = ({tiempo}) => {
-    // const [semaforoState, setSemaforoState] = useState('circuloVerdeON');
-
-    // const cambiarColor = () => {
-    //     if (semaforoState === 'circuloRojoON') {
-    //         setSemaforoState('circuloAmarilloON');
-    //     } else if (semaforoState === 'circuloAmarilloON') {
-    //         setSemaforoState('circuloVerdeON');
-    //     } else {
-    //         setSemaforoState('circuloRojoON');
-    //     }
-    // };
-
+    
     const obtenerClaseSemaforo = () => {
         if (tiempo < 46000) {
             return 'circuloVerdeON'; // Iniciar en verde
