@@ -15,7 +15,7 @@ const EstatusLlamada = ({contactId}) => {
     //, time, setTime
 
     //Obtener transcripcion
-    const [url] = useState(`http://10.48.109.113:8080/llamada/transcripcion/${contactId}`);
+    const [url] = useState(`http://localhost:8080/llamada/transcripcion/${contactId}`);
     const [sentimiento, setSentimiento] = useState(normal);
     const [lastSentimiento, setLastSentimiento] = useState("NEUTRAL")
     // const [contenido, setContenido] =  useEffect(null);
