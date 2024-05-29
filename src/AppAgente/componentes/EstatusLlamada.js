@@ -8,19 +8,19 @@ import feliz from '../images/feliz.PNG';
 import normal from '../images/normal.PNG';
 import enojado from '../images/enojado.PNG';
 
-//const [tiempo, setTiempo] = useState(0);
-// const [corriendo, setCorriendo] = useState(false);
+const sentimientoImagenes = {
+    NEUTRAL: normal,
+    POSITIVE: feliz,
+    NEGATIVE: enojado,
+  };
 
 const EstatusLlamada = ({contactId}) => {
     //, time, setTime
+    //const [tiempo, setTiempo] = useState(0);
+    // const [corriendo, setCorriendo] = useState(false);
+    const [sentimiento, setSentimiento] = useState("NEUTRAL");
 
-    //Obtener transcripcion
-    const [url] = useState(`http://localhost:8080/llamada/transcripcion/${contactId}`);
-    const [sentimiento, setSentimiento] = useState(normal);
-    const [lastSentimiento, setLastSentimiento] = useState("NEUTRAL")
-    // const [contenido, setContenido] =  useEffect(null);
-
-    //UseEffect que se mantiene al tanto cada que se obtiene un contactId para 
+    //UseEffect que se mantiene al tanto si se obtiene un contactId 
     //inicializar el contador
     useEffect(() => {
         console.log("Contact Event - Contact Id from useEffect:", contactId)
@@ -40,47 +40,28 @@ const EstatusLlamada = ({contactId}) => {
 
     //Descargar la transcripcion checar su funcionamiento
     const descargar = useCallback(async () => {
+        if (!contactId) return; // Verifica que contactId no sea null
+
+        const url = `http://172.27.112.1:8080/llamada/transcripcion/${contactId}`;
+
         try {
-          const response = await fetch(url);
-          console.log(url)
-          const data  = await response.json();
-          console.log('Data recibida del endpoint', data)
-          const sentiments = data[0]?.Segments.map(segment => segment.Transcript.Sentiment);
-            // Use the last sentiment from the array, or 'NEUTRAL' if no data is available
-          console.log("El arreglo de sentimientos es:", sentiments)
-          const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
-          setSentimiento(latestSentiment);
-        //   const arrNuevo = data[0].Segments.map((segment) => {
-        //     const sentimiento = {
-        //       sentiment: segment.Transcript.Sentiment,
-        //     };
-            // const contenido = {
-            //     content: segment.Transcript.Content
-            // }
-            // return sentimiento;//contenido
-        //   });
-         
-        //   setSentimiento(sentimiento);
-        //   setContenido(contenido);
+            const response = await fetch(url);
+            console.log(url);
+            const data = await response.json();
+            console.log('Data recibida del endpoint', data);
+            const sentiments = data[0]?.Segments.map(segment => segment.Transcript.Sentiment);
+            console.log("El arreglo de sentimientos es:", sentiments);
+            const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
+            if (latestSentiment !== sentimiento) {
+              setSentimiento(latestSentiment);
+            }
+    
           console.log('El lastSentiment del arreglo:', latestSentiment)
-          console.log('El sentimiento al final es', sentimiento)
+        //   console.log('El sentimiento al final es', sentimiento)
         } catch (error) {
           console.error('Error al descargar los datos:', error);
         }
-      }, [url]);
-    
-    //Cambia el sentimiento de la llamada acada que se actualizan los datos
-    const cambiarSentimiento = useCallback(() => {
-        if (sentimiento === "NEUTRAL") {
-            setSentimiento(normal);
-        } else if (sentimiento === "NEGATIVE") {
-            setSentimiento(enojado);
-        } else if (sentimiento === "POSITIVE"){
-            setSentimiento(feliz);
-        }else{
-            setSentimiento(normal);
-        }
-    }, [sentimiento]);  
+      }, [contactId, sentimiento]);
 
     //UseEffect que descarga los json cada 3 segundos
     // useEffect(() => {
@@ -90,16 +71,14 @@ const EstatusLlamada = ({contactId}) => {
     //         return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
     //     }
     // }, [contactId, descargar]);
-    useEffect(() => {
-        const interval = setInterval(descargar, 3000); // Descargar cada 3 segundos
-        return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
-    }, [descargar]);
 
-    //UseEffect que ayuda a descargar el sentimiento cada 5 segundos
     useEffect(() => {
-        const interval = setInterval(cambiarSentimiento, 5000); // Cambiar sentimiento cada 5 segundos
-        return () => clearInterval(interval); // Limpiar intervalo al desmontar el componente
-    }, [cambiarSentimiento]);
+        if (contactId) {
+          const interval = setInterval(descargar, 3000);
+          return () => clearInterval(interval);
+        }
+      }, [descargar, contactId]);
+      
     
     // const tiempoFormateado = () => {
     //     const minutos = Math.floor(time / 60000);
@@ -110,6 +89,8 @@ const EstatusLlamada = ({contactId}) => {
     
     //     return `${formatMinutos}:${formatSegundos}`;
     // };
+
+    const imagenSentimiento = sentimientoImagenes[sentimiento] || normal;
 
     return (
         <div className='llamada'>
@@ -123,12 +104,14 @@ const EstatusLlamada = ({contactId}) => {
                 
                 <div className='estado'>
                     <div className='columna'>
-                        {sentimiento !== "NEUTRAL" && (
+                        {/* {sentimiento !== "NEUTRAL" && (
                             <div className='sentimiento'>
-                                <img src={sentimiento} alt="sentimiento" className='sentimiento'/>
+                                <img src={sentimiento} className='sentimiento'/>
                             </div>
-                        )}
-                        {/* <Semaforo tiempo={tiempo} /> */}
+                        )} */}
+                        <div className='sentimiento'>
+                            <img src={imagenSentimiento} alt="sentimiento" className='sentimiento' />
+                        </div>
                     </div>
                 </div>
                 {/* <h4>{contenido}</h4> */}
