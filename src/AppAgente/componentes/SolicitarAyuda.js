@@ -1,45 +1,17 @@
-import '../styles/solicitarAyuda.css';
-import React, { useState } from "react";
+import '../styles/solicitarAyuda.css'
+import React from 'react'
 import { Button } from '@mui/material';
 
 const SolicitarAyuda = () => {
-  const [url] = useState("http://10.48.109.113:8080/notificacion/mandarSolicitudAyuda");
-  const [idAgente, setIdAgente] = useState(null);
-  const [idSupervisor, setIdSupervisor] = useState(null);
-
+  
   const solicitarAyuda = () => {
-    const agenteId = 2;
-    const supervisorId = 1;
-    setIdAgente(agenteId);
-    setIdSupervisor(supervisorId);
-    console.log('Ayuda solicitada');
-
-    const request = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        idUsuario: idSupervisor,
-        contenido: `El agente ${idAgente} solicitó ayuda.`
-      })
-    };
-
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Respuesta del servidor:', data);
-        console.log(request)
-      })
-      .catch(error => {
-        console.error('Error en la solicitud:', error);
-      });
-  };
-
-  return (
-    <div className='solicitar'>
-      <h3>¿Necesitas ayuda de un supervisor?</h3>
-      <Button className='botonAyuda' onClick={solicitarAyuda}>Solicitar</Button>
-    </div>
-  );
-};
-
+      console.log('Ayuda solicitada')
+  }
+    return (
+      <div className='solicitar'>
+        <h3>¿Necesitas ayuda de un supervisor?</h3>
+        <Button className='botonAyuda' onClick={solicitarAyuda}>Solicitar</Button>
+      </div>
+      )
+}
 export default SolicitarAyuda;

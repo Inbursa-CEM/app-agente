@@ -3,33 +3,27 @@ import { createContext, useState, useEffect } from "react";
 export const ContextoInfo = createContext(); // Espacio global
 
 const ProveedorInfoCliente = ({ children }) => {
-  const [cell, setCell] = useState("");
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
-  const [grupoTransax, setGrupoTransax] = useState([]);
-  const [transax, setTransax] = useState([]);
-  const [arrLlamadas, setArrLlamadas] = useState([]);
-  const [numLlamadas, setNumLlamadas] = useState(0);
-  const urlCliente = "http://localhost:8080/cliente/consultar/" + cell;
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cell;
+  const [arrLlamadas, setLlamadas] = useState([]);
+  const [numLlamadas, setNumLlamadas] = useState([]);
+  const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
+  const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
   const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar/" + cell;
-  const urlOneTransax =
-    "http://localhost:8080/transaccion/transax/" + cell;
-  const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cell;
-  const urlNumLlamadas =
-    "http://localhost:8080/llamada/numLlamadasCliente/" + cell;
+    "http://localhost:8080/transaccion/consultar?numCuenta=123456";
+  const urlLlamadas = "http://localhost:8080/llamada/consultar";
+  const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas?idUsuario=1";
 
   useEffect(() => {
     console.log("Descargando datos");
     fetch(urlCliente)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Datos obtenidos del cliente:", data);
+        console.log("Datos obtenidos del cliente:", data);
         const dataCliente = {
-          nombre: data.nombre,
-          telefono: data.telefono,
+          nombre: data[0].nombre,
+          telefono: data[0].telefono,
         };
         setCliente(dataCliente);
       })
@@ -38,11 +32,11 @@ const ProveedorInfoCliente = ({ children }) => {
     fetch(urlTarjeta)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Datos obtenidos de la tarjeta:", data);
+        console.log("Datos obtenidos de la tarjeta:", data);
         const dataTarjeta = {
-          cuenta: data.numCuenta,
-          tipo: data.tipo,
-          saldo: data.saldo,
+          cuenta: data[0].numCuenta,
+          tipo: data[0].tipo,
+          saldo: data[0].saldo,
         };
         setTarjeta(dataTarjeta);
       })
@@ -51,7 +45,7 @@ const ProveedorInfoCliente = ({ children }) => {
     fetch(urlTransacciones)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Datos obtenidos de las transacciones:", data);
+        console.log("Datos obtenidos de las transacciones:", data);
         const arrNuevo = data.map((transax) => {
           const transaccion = [
             transax.nombre,
@@ -61,70 +55,43 @@ const ProveedorInfoCliente = ({ children }) => {
           return transaccion;
         });
         setTransacciones(arrNuevo);
-        setGrupoTransax(data);
-      })
-      .catch((error) => console.log(error));
-
-    fetch(urlOneTransax)
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log("Transacción requerida:", data);
-        setTransax(data);
       })
       .catch((error) => console.log(error));
 
     fetch(urlLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Datos obtenidos de las llamadas:", data);
-        const arrNuevo = [];
-        data.forEach((item) => {
-          item.llamadas.forEach((llamada) => {
-            const call = {
-              tema: llamada.tema,
-              motivo: llamada.motivo,
-              fecha: `${llamada.fechaInicio.substring(
-                8,
-                10
-              )}/${llamada.fechaInicio.substring(
-                5,
-                7
-              )}/${llamada.fechaInicio.substring(0, 4)}`,
-              stars: llamada.nivelSatisfaccion,
-            };
-            arrNuevo.push(call);
-          });
+        console.log("Datos obtenidos de las llamadas:", data);
+        const arrNuevo = data.map((llamada) => {
+          const call = {
+            tema: llamada.tema,
+            motivo: llamada.motivo,
+            fecha:
+              llamada.fechaInicio.substring(8, 10) +
+              "/" +
+              llamada.fechaInicio.substring(5, 7) +
+              "/" +
+              llamada.fechaInicio.substring(0, 4),
+            stars: llamada.nivelSatisfaccion,
+          };
+          return call;
         });
-        setArrLlamadas(arrNuevo);
+        setLlamadas(arrNuevo);
       })
       .catch((error) => console.log(error));
 
     fetch(urlNumLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        let contador = 0;
-        data.forEach((item) => {
-          if (item.numllamadas === 1) {
-            contador++;
-          }
-        });
-        setNumLlamadas(contador);
+        console.log("Número de llamadas en el mes:", data);
+        setNumLlamadas(data);
       })
       .catch((error) => console.log(error));
-  }, [urlCliente]);
+  }, []);
 
   return (
     <ContextoInfo.Provider
-      value={[
-        cliente,
-        tarjeta,
-        arrTransacciones,
-        arrLlamadas,
-        numLlamadas,
-        setCell,
-        grupoTransax,
-        transax
-      ]}
+      value={[cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas]}
     >
       {children}
     </ContextoInfo.Provider>
