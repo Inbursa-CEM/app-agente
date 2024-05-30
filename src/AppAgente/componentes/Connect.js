@@ -2,9 +2,10 @@ import "amazon-connect-streams";
 import React, { useContext, useEffect } from 'react';
 import { ContextoInfo } from "./ProveedorInfoCliente";
 
-const Connect = ({ setContactId }) => {
+const Connect = ({ setContactId, setTime }) => {
   // Contexto de proveedor de información
   const [ , , , , , setCell, , ] = useContext(ContextoInfo);
+
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -51,6 +52,13 @@ const Connect = ({ setContactId }) => {
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
         // console.log("Número de telefono: ", number);
         setCell(number);
+      });
+      
+      //Cuando la llamada termine se deben de restablecer los parametros
+      //Es mas importante que se reinicie el tiempo, mas que contact
+      contact.onEnded(async function (contact){
+        setContactId(null)
+        setTime(0)
       });
     });
 

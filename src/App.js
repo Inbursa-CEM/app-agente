@@ -7,13 +7,18 @@ import ProveedorInfoCliente from "./AppAgente/componentes/ProveedorInfoCliente";
 import React, { useState} from 'react';
 
 function App() {
+
+  const [time, setTime] = useState(0);
   const [contactId, setContactId] = useState(null);
+
   return (
     <div className="App">
       <div className="interfaz">
         <div className="contenedor">
           <EstatusLlamada 
           contactId={contactId}
+          time = {time}
+          setTime = {setTime}
           />
         </div>
         <div className="contenedor2">
@@ -26,6 +31,7 @@ function App() {
         <div className="contenedor4">
           <Connect
           setContactId = {setContactId} 
+          setTime={setTime}
           />
           </div>
         </ProveedorInfoCliente>
