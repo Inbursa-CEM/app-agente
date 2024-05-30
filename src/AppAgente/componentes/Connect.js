@@ -1,8 +1,11 @@
 import "amazon-connect-streams";
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Connect = ({ setContactId, setTime }) => {
-  //Variables to assing the call id and the status of the call
+  // Contexto de proveedor de información
+  const [ , , , , , setCell, , ] = useContext(ContextoInfo);
+
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -46,9 +49,9 @@ const Connect = ({ setContactId, setTime }) => {
         setContactId(cid); // Aquí se llama a setContactId con el valor de cid
         console.log("Contact ID:", cid);
         var attributeMap = contact.getAttributes();
-        console.log(attributeMap);
-        // var number = contact.getAttributes().customerNumber;
-        // console.log("NUMERO" + number);
+        const number = contact.getInitialConnection().getEndpoint().phoneNumber;
+        // console.log("Número de telefono: ", number);
+        setCell(number);
       });
       
       //Cuando la llamada termine se deben de restablecer los parametros
