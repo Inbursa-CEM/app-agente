@@ -6,7 +6,7 @@ import '../styles/animations.css';
 import '../styles/styles.css'
 
 const SeccionComponent = ({ seccion }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const nodeRef = useRef(null);
   return (
     <div className='seccion'>

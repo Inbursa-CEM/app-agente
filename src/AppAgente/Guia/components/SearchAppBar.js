@@ -56,10 +56,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchAppBar = () => {
+const SearchAppBar = ({text}) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const [searchInput, setSearchInput] = React.useState('');
+
+  const handleSearchInputChange = (event) => {
+    const newValue = event.target.value;
+    setSearchInput(newValue);
+    console.log(newValue);
+  }
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -183,6 +191,7 @@ const SearchAppBar = () => {
             <StyledInputBase
               placeholder="Buscar…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={handleSearchInputChange}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

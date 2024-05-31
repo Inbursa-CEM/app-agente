@@ -6,7 +6,7 @@ import '../styles/animations.css';
 import '../styles/styles.css'
 
 const SubtituloComponent = ({ subtitulo }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const nodeRef = useRef(null);
   return (
     <div className='subtitulo'>

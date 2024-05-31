@@ -4,7 +4,7 @@ import SearchAppBar from './SearchAppBar';
 import GuiaComponent from './GuiaComponent'
 import "../styles/styles.css"
 
-const InterfazGuia = () => {
+const InterfazGuia = ({encontrarTexto}) => {
   const guia = new Guia("Guia callcenter Inbursa");
 
   const seccion1 = new Seccion("Sección 1");

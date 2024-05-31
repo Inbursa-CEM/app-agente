@@ -4,7 +4,7 @@ import '../styles/styles.css'
 
 const PasoComponent = ({ paso }) => {
   return (
-    <li>{paso}</li>
+    <div>{paso}</div>
 
   );
 };
