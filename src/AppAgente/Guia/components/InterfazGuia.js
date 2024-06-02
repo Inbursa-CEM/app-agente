@@ -3,6 +3,7 @@ import { Guia, Seccion, Subtitulo } from '../classes/Guia';
 import SearchAppBar from './SearchAppBar';
 import GuiaComponent from './GuiaComponent'
 import "../styles/styles.css"
+import { useState } from 'react';
 
 const InterfazGuia = ({encontrarTexto}) => {
   const guia = new Guia("Guia callcenter Inbursa");
@@ -36,12 +37,29 @@ const InterfazGuia = ({encontrarTexto}) => {
   guia.agregarSeccion(seccion1);
   guia.agregarSeccion(seccion2);
 
+  const seccion3 = new Seccion("Seccion 3")
+  const subtitulo3_1 = new Subtitulo("Suuuubtitulo 3.1");
+  subtitulo3_1.agregarPaso("Paso 1: kkkkkkkkkkk");
+  subtitulo3_1.agregarPaso("Paso 2: kkk");
+
+  const [guiaU, setGuiaU] = useState(guia);
+
+  const buscarTexto = (textoBusqueda) => {
+    console.log(`Texto en interfaz ${textoBusqueda}`);
+    seccion3.agregarSubtitulo(subtitulo3_1);
+    guia.agregarSeccion(seccion3);
+    setGuiaU(guia);
+    //hacer fors pa encontrar el texto busqueda
+    // crear  una guia nueva con usestate para guia
+
+  }
+
 
   return (
     <div>
-      <SearchAppBar />
+      <SearchAppBar buscarTexto={buscarTexto} />
       <div className='contenedor-1'>
-        <GuiaComponent guia={guia} />
+        <GuiaComponent guia={guiaU} />
       </div>
     </div>
 

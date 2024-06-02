@@ -9,6 +9,18 @@ class Guia {
   agregarSeccion(seccion) {
     this.secciones.push(seccion);
   }
+
+  encontrarTexto(texto) {
+// for seccion in guia:
+    //   if texto in seccion
+    //    for subtitulo in seccion:
+            //it texto in subtitulo:
+    //      for paso in subtitulo:
+    //        if textoBusqueda in paso:
+    //            newGuia.add(seccion);
+    //            
+    return this
+  }
 }
 
 class Seccion {
