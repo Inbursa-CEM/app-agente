@@ -49,6 +49,17 @@
   margin-left: -1px;
 }
 
+.contenedor-notificaciones {
+  opacity: .97;
+  position:absolute;
+  transform: translate(-91%, 6%);
+  background: rgb(179, 179, 179);
+  border-radius: 3px;
+  width: 300px;
+  height: 500px;
+
+}
+
 .contenedor4{
   margin-top: -705px;
   width: 680px;
