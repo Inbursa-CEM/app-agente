@@ -7,17 +7,13 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { Button } from "@mui/material";
 import MenuNotificaciones from "./MenuNotificaciones";
-import AlignItemsList from "./MenuNotificaciones";
+import '../styles/animations.css'
+
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -73,7 +69,7 @@ const SearchAppBar = ({ buscarTexto }) => {
   const handleToggleNotis = () => {
     setToggleNotis(!toggleNotis);
   };
-
+  const nodeRef = React.useRef(null)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -110,7 +106,18 @@ const SearchAppBar = ({ buscarTexto }) => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {toggleNotis && <AlignItemsList />}
+            <SwitchTransition mode="out-in">
+              <CSSTransition
+                key={toggleNotis ? "show" : "hide"}
+                nodeRef={nodeRef}
+                timeout={200}
+                classNames="fade"
+              >
+                <div style={{userSelect: 'none'}} ref={nodeRef}>
+                {toggleNotis && <MenuNotificaciones />}
+                </div>
+              </CSSTransition>
+            </SwitchTransition>
             <IconButton
               onClick={handleToggleNotis}
               size="large"
@@ -121,7 +128,6 @@ const SearchAppBar = ({ buscarTexto }) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-
           </Box>
         </Toolbar>
       </AppBar>
