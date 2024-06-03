@@ -165,7 +165,7 @@ const SearchAppBar = ({buscarTexto}) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: '#31356E' , fontFamily: "'Poppins', sans-serif"}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -191,7 +191,7 @@ const SearchAppBar = ({buscarTexto}) => {
             <StyledInputBase
               placeholder="Buscar…"
               inputProps={{ 'aria-label': 'search' }}
-              onClick={handleSearchInputChange}
+              onChange={handleSearchInputChange}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -201,7 +201,7 @@ const SearchAppBar = ({buscarTexto}) => {
               aria-label="show 0 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={0} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

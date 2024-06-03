@@ -1,11 +1,22 @@
-// PasoComponent.js
 import React from 'react';
-import '../styles/styles.css'
+import DOMPurify from 'dompurify';
+import '../styles/styles.css';
 
-const PasoComponent = ({ paso }) => {
+const PasoComponent = ({ index, paso, searchString }) => {
+  const resaltarTexto = (text) => {
+    if (!searchString) return text; 
+
+    const regex = new RegExp(`(${searchString})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  };
+
+  // Función para sanitizar HTML
+  const sanitizarHTML = (html) => {
+    return DOMPurify.sanitize(html);
+  };
+
   return (
-    <div>{paso}</div>
-
+      <div style={{ userSelect: 'none', fontSize: '.7rem', marginLeft:'-20px'}} className='paso' dangerouslySetInnerHTML={{__html: sanitizarHTML(resaltarTexto(`Paso ${index + 1}: ${paso}`))}} />
   );
 };
 
