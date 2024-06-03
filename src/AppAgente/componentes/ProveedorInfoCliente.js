@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const ContextoInfo = createContext(); // Espacio global
 
-const ProveedorInfoCliente = ({ children }) => {
+const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
   const [cell, setCell] = useState("");
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
@@ -70,6 +70,7 @@ const ProveedorInfoCliente = ({ children }) => {
       .then((data) => {
         // console.log("Transacción requerida:", data);
         setTransax(data);
+        setIdTransaccion(data);
       })
       .catch((error) => console.log(error));
 

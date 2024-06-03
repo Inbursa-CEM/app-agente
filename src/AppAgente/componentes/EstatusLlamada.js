@@ -14,7 +14,9 @@ const sentimientoImagenes = {
   NEGATIVE: enojado,
 };
 
-const EstatusLlamada = ({ contactId, time, setTime }) => {
+//Iniciar llamada para postear la base de datos 
+//contactID 
+const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFinal}) => {
   const [sentimiento, setSentimiento] = useState("NEUTRAL");
 
   // UseEffect que inicializa el contador al obtener un contactId
@@ -47,6 +49,7 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
       const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
       if (latestSentiment !== sentimiento) {
         setSentimiento(latestSentiment);
+        setSentimientoFinal(latestSentiment);
       }
 
       console.log('El lastSentiment del arreglo:', latestSentiment);
@@ -97,7 +100,9 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
         </div>
         <h3>{contactId}</h3>                
         <SolicitarAyuda />
-        <Estadistica />
+        <Estadistica 
+        idAgente = {idAgente}
+        />
       </div>
     </div>
   );

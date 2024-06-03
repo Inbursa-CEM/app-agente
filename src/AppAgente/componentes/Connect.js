@@ -1,11 +1,59 @@
 import "amazon-connect-streams";
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ContextoInfo } from "./ProveedorInfoCliente";
 
-const Connect = ({ setContactId, setTime }) => {
+const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente}) => {
   // Contexto de proveedor de información
   const [ , , , , , setCell, , ] = useContext(ContextoInfo);
+  const [url] = useState("http://localhost:8080/llamada/inicioLlamada");
+  const [urlFin] = useState("http://localhost:8080/llamada/finLlamada");
+  const [contacto, setContacto] = useState("")
 
+
+  //Funciones para guardar los datos de la llamada en la base de datos 
+  const inicializaLlamada = () =>{
+    const request = {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idUsuario: 2,
+        idTransaccion: 3, 
+        // contactId: contactId
+      })
+    };
+
+    fetch(url, request)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Respuesta del servidor:', data);
+      console.log(request)
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+  }
+
+  const finalizaLlamada = () =>{
+    const request = {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idLlamada: "51",
+        sentimiento: sentimiento, 
+        // contactId: contactId
+      })
+    };
+
+    fetch(urlFin, request)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Respuesta del servidor:', data);
+      console.log(request)
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+  }
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -40,6 +88,7 @@ const Connect = ({ setContactId, setTime }) => {
       ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
     });
 
+    
     // Code to be executed once a call starts
     // eslint-disable-next-line no-undef
     connect.contact(function (contact) {
@@ -47,16 +96,20 @@ const Connect = ({ setContactId, setTime }) => {
         let cid = contact.getContactId();
         console.log(cid);
         setContactId(cid); // Aquí se llama a setContactId con el valor de cid
+        setContacto(cid)
+        inicializaLlamada();//Se guardan los datos del inicio de la llamada en la bd
         console.log("Contact ID:", cid);
         var attributeMap = contact.getAttributes();
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
         // console.log("Número de telefono: ", number);
         setCell(number);
+
       });
       
       //Cuando la llamada termine se deben de restablecer los parametros
-      //Es mas importante que se reinicie el tiempo, mas que contact
+      //Hacer que se haga un update de la llamada una vez que se acabe
       contact.onEnded(async function (contact){
+        finalizaLlamada()
         setContactId(null)
         setTime(0)
       });

@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 
-export default function ProblemasResueltosPorDia(){
-    const [url, setUrl] = useState("http://localhost:8080/llamada/problemasResueltos?idUsuario=2");
+export default function ProblemasResueltosPorDia(idAgente){
+    const url = `http://localhost:8080/llamada/problemasResueltos?idUsuario=${idAgente}`;
     const [problemasResueltos, setProblemasResueltos] = useState(0);
     const [problemasNoResueltos, setProblemasNoResueltos] = useState(0);
     const [fecha, setFecha] = useState("");
