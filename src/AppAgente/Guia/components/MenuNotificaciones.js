@@ -1,34 +1,62 @@
 import * as React from "react";
 import "../styles/notificacion.css";
 import Notificacion from "./Notificacion";
-const arrPrueba = [
-  {nombre: "Ares Ortiz", fechaReunion:"06-03-24", fechaNotificacion:"Hace 1 minuto"},
-  {nombre: "Alan Alcántara", fechaReunion:"08-20-24", fechaNotificacion:"Hace 10 minutos"},
-  {nombre: "Ares Ortiz", fechaReunion:"08-20-24" ,fechaNotificacion:"Hace 2 días"},
-  {nombre: "Rosa Figueroa", fechaReunion:"08-12-24", fechaNotificacion:"Hace 5 días"},
-  {nombre: "Jhon Cena", fechaReunion:"08-02-24" ,fechaNotificacion:"Hace 7 días"},
-  {nombre: "Ares Ortiz", fechaReunion:"08-10-24", fechaNotificacion:"Hace 15 días"},
-  {nombre: "Ares Ortiz", fechaReunion:"08-10-24", fechaNotificacion:"Hace 15 días"},
-  {nombre: "Ares Ortiz", fechaReunion:"08-10-24", fechaNotificacion:"Hace 15 días"},
-  {nombre: "Ares Ortiz", fechaReunion:"08-10-24", fechaNotificacion:"Hace 15 días"},
-]
-export default function MenuNotificaciones() {
+import { useState, useCallback, useEffect } from "react";
+
+const MenuNotificaciones = () => {
+  const [arrPrueba, setArrPrueba] = useState([]);
+
+  const url = `http://localhost:8080/notificacion/obtenerSolicitudAyuda?idUsuario=2`;
+
+  const formatFechaHora = (fechaHora) => {
+    const date = new Date(fechaHora);
+    const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const opcionesHora = { hour: '2-digit', minute: '2-digit' };
+
+    const fecha = date.toLocaleDateString(undefined, opcionesFecha);
+    const hora = date.toLocaleTimeString(undefined, opcionesHora);
+
+    return { fecha, hora };
+  };
+
+  const descargar = useCallback(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const notificaciones = data.map((notificacion) => {
+          const { fecha, hora } = formatFechaHora(notificacion.fechaHora);
+          return {
+            nombre: notificacion.idUsuario,
+            contenido: notificacion.contenido,
+            fechaNotificacion: fecha,
+            horaNotificacion: hora,
+          };
+        });
+        setArrPrueba(notificaciones);
+      })
+      .catch((error) => console.log(error));
+  }, [url]);
+
+  useEffect(() => {
+    descargar();
+  }, [descargar]);
+
   return (
     <div className="contenedor-notificaciones">
       Notificaciones
-
-      {
-        arrPrueba.map((notificacion, index) => (
-          <Notificacion 
-            key={index}
-            nombre={notificacion.nombre} 
-            fechaReunion={notificacion.fechaReunion} 
-            imagenSrc={require('../icons/user-icon.png')} 
-            fechaNotificacion={notificacion.fechaNotificacion}
-          />
-        ))
-      }
+      {arrPrueba.map((notificacion, index) => (
+        <Notificacion
+          key={index}
+          nombre={notificacion.nombre}
+          contenido={notificacion.contenido}
+          imagenSrc={require('../icons/user-icon.png')}
+          fechaNotificacion={notificacion.fechaNotificacion}
+          horaNotificacion={notificacion.horaNotificacion}
+        />
+      ))}
     </div>
   );
-}
+};
 
+export default MenuNotificaciones;

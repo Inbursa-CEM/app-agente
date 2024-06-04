@@ -31,16 +31,6 @@ const Estadisticas = () => {
                     <div className='modal-content'>
                         <h2 id='titulo'>Estadísticas</h2>
                         <div className='graficas'>
-                            {/* <div className='agente' >
-                                <div className='cali'>
-                                    <h3>Calificación</h3>
-                                    <canvas id='calificacion'></canvas>
-                                </div>
-                                <div className='problemas'>
-                                    <h3>Problemas resueltos satifactoriamente</h3>
-                                    <canvas id='problemas'></canvas>
-                                </div>
-                            </div> */}
                             <div className='llamadas'>
                                 <h3>Número de llamadas por día</h3>
                                 <br></br>
@@ -55,7 +45,7 @@ const Estadisticas = () => {
                                 <PromedioDuracionDia/>
                             </div>  
                         </div>
-                        <Button onClick={abrirModal} className="close-modal">Cerrar</Button>
+                        {/* <Button onClick={abrirModal} className="close-modal">Cerrar</Button> */}
                     </div>
                 </div>
             </div>   )}
