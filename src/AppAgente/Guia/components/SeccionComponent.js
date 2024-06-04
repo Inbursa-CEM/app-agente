@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: componente para renderear secciones con animacion
 import React, { useRef, useState } from 'react';
 import SubtituloComponent from './SubtituloComponent';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
@@ -6,6 +8,8 @@ import '../styles/animations.css';
 import '../styles/styles.css';
 
 const SeccionComponent = ({ seccionIndex, seccion, searchString }) => {
+  //Desc: si se ense;a o se oculta hay una animacion, tambien se marca el texto 
+  //buscado por el usuario.
   const [show, setShow] = useState(true);
   const nodeRef = useRef(null);
 

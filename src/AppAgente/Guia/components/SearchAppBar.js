@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: Componente de Material UI mdoificado para mostrar notificaciones
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";

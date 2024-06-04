@@ -1,3 +1,6 @@
+//Autor: Arturo Montes G.
+//Desc:  Componente que tiene la guia almacenada y se encarga de cargar 
+//todo el contenedor de guia
 import { Guia, Seccion, Subtitulo } from "../classes/Guia";
 import SearchAppBar from "./SearchAppBar";
 import GuiaComponent from "./GuiaComponent";
@@ -110,6 +113,11 @@ const InterfazGuia = ({ encontrarTexto }) => {
   const [textoBuscar, setTextoBuscar] = useState(null)
 
   const buscarTexto = (textoBusqueda) => {
+    //Descripcion: funcion que busca el texto ingresado por el usuario
+    //            y en caso de no encontrar texto que coincida muestra una mensaje 
+    //            de vacio
+    //Parametros: 
+    //            textoBusqueda: string
     console.log(`Texto en interfaz ${textoBusqueda}`);
     setTextoBuscar(textoBusqueda);
     const nuevaGuia = guiaInbursa.encontrarTexto(textoBusqueda);
@@ -120,8 +128,6 @@ const InterfazGuia = ({ encontrarTexto }) => {
       setGuiaU(textoBusqueda === '' ? guiaInbursa: nuevaGuia);
     }
 
-//    seccion3.agregarSubtitulo(subtitulo3_1);
- //   guiaInbursa.agregarSeccion(seccion3);
   };
 
   return (

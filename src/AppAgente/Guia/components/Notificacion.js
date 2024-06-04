@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: Componente para dar formato a las notificaciones
 import React from 'react';
 import "../styles/notificacion.css";
 
@@ -12,11 +14,12 @@ const Notificacion = ({ nombre, fechaReunion, imagenSrc, fechaNotificacion }) =>
                     <span className="nombre">{nombre}</span> quiere tener una reunión contigo el <span className="fechaReunion">{fechaReunion}</span>.
                 </p>
             </div>
-            <div className="fecha-container">
-                <p className="fechaNotificacion">{fechaNotificacion}</p>
-            </div>
         </div>
     );
 };
 
 export default Notificacion;
+
+            //<div className="fecha-container">
+             //   <p className="fechaNotificacion">{fechaNotificacion}</p>
+            //</div>

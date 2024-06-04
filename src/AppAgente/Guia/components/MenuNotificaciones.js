@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: Componente para renderear todo el menu de notificaciones y desplegarlas
 import * as React from "react";
 import "../styles/notificacion.css";
 import Notificacion from "./Notificacion";
