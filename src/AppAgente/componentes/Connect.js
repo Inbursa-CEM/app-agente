@@ -17,7 +17,9 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         idUsuario: 2,
+        // idUsuario: idAgente,
         idTransaccion: 3, 
+        contactId: contacto
         // contactId: contactId
       })
     };
@@ -38,9 +40,9 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idLlamada: "51",
+        // idLlamada: "110",
         sentimiento: sentimiento, 
-        // contactId: contactId
+        contactId: contacto
       })
     };
 
@@ -97,7 +99,6 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
         console.log(cid);
         setContactId(cid); // Aquí se llama a setContactId con el valor de cid
         setContacto(cid)
-        inicializaLlamada();//Se guardan los datos del inicio de la llamada en la bd
         console.log("Contact ID:", cid);
         var attributeMap = contact.getAttributes();
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
@@ -109,13 +110,19 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       //Cuando la llamada termine se deben de restablecer los parametros
       //Hacer que se haga un update de la llamada una vez que se acabe
       contact.onEnded(async function (contact){
-        finalizaLlamada()
+        finalizaLlamada(contact.getContactId())
         setContactId(null)
         setTime(0)
       });
     });
 
   }, []);
+
+  useEffect(() =>{
+    if (contacto !== null){
+      inicializaLlamada();//Se guardan los datos del inicio de la llamada en la bd
+    }
+  }, [contacto])
 
   return <div id="ccp" style={{ width: "680px", height: "350px" }}></div>;
 };

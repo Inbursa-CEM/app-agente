@@ -51,7 +51,7 @@ const Estadisticas = ({idAgente}) => {
                                 />
                             </div>  
                         </div>
-                        <Button onClick={abrirModal} className="close-modal">Cerrar</Button>
+                        {/* <Button onClick={abrirModal} className="close-modal">Cerrar</Button> */}
                     </div>
                 </div>
             </div>   )}
