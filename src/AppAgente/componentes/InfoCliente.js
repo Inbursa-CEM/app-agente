@@ -1,3 +1,6 @@
+// Autor: Alan Alcántara
+// Contiene los componentes de Datos, Transacciones y Llamadas
+
 import "../styles/infoCliente.css";
 import Llamadas from "./Llamadas";
 import Transacciones from "./Transacciones";
@@ -10,6 +13,7 @@ const Contenedor = () => {
     useContext(ContextoInfo);
   let indice = 0;
 
+  // Busca el índice de la transacción actual
   for (let i = 0; i < grupoTransax.length; i++) {
     if (grupoTransax[i].idTransaccion === transax.idTransaccion) {
       indice = i;

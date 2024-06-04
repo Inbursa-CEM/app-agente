@@ -1,3 +1,6 @@
+// Autores: Alan Alcántara y Rosa Figueroa
+// Interfaz de amazon connect con sus funciones de inicio y finalización de llamada
+
 import "amazon-connect-streams";
 import React, { useContext, useEffect } from 'react';
 import { ContextoInfo } from "./ProveedorInfoCliente";
@@ -5,7 +8,6 @@ import { ContextoInfo } from "./ProveedorInfoCliente";
 const Connect = ({ setContactId, setTime }) => {
   // Contexto de proveedor de información
   const [ , , , , , setCell, , ] = useContext(ContextoInfo);
-
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -48,12 +50,11 @@ const Connect = ({ setContactId, setTime }) => {
         console.log(cid);
         setContactId(cid); // Aquí se llama a setContactId con el valor de cid
         console.log("Contact ID:", cid);
-        var attributeMap = contact.getAttributes();
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
         // console.log("Número de telefono: ", number);
         setCell(number);
       });
-      
+
       //Cuando la llamada termine se deben de restablecer los parametros
       //Es mas importante que se reinicie el tiempo, mas que contact
       contact.onEnded(async function (contact){

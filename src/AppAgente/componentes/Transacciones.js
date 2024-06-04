@@ -1,5 +1,5 @@
+// Autor: Alan Alcántara
 // Componente que muestra las últimas transacciones realizadas por el cliente
-// Autor: Alan Alcántara Ávila
 
 import ListItemText from "@mui/material/ListItemText";
 import "../styles/infoCliente.css";

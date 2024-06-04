@@ -1,3 +1,7 @@
+// Autor: Alan Alcántara
+// Proveedor de la información del cliente para mostrarla en la interfaz
+// Llamadas al API para descargar los datos del cliente
+
 import { createContext, useState, useEffect } from "react";
 
 export const ContextoInfo = createContext(); // Espacio global
