@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: Componente guia, recibe una guia para renderear toda la informacion de guia
 import React, { useRef, useState } from 'react';
 import SeccionComponent from './SeccionComponent';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
@@ -10,6 +12,7 @@ const GuiaComponent = ({ guia, searchString }) => {
   const nodeRef = useRef(null);
 
   const resaltarTexto = (text) => {
+    //Descripcion: funcion para subrayar texto ingreadado por el usuario
     if (!searchString) return text; 
 
     const regex = new RegExp(`(${searchString})`, 'gi');

@@ -1,8 +1,11 @@
+//Autor: Arturo Montes G.
+//Desc: Componente para mostrar los pasos de la guia
 import React from 'react';
 import DOMPurify from 'dompurify';
 import '../styles/styles.css';
 
 const PasoComponent = ({ index, paso, searchString }) => {
+//Desc:tiene una animacion cuando aparece y desaparece. Tambien teine funcion para resaltar texto 
   const resaltarTexto = (text) => {
     if (!searchString) return text; 
 

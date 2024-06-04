@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: 
 import { createContext } from "react";
 
 export const ContextoGuia = createContext();

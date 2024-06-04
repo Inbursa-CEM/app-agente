@@ -1,3 +1,5 @@
+//Autor: Arturo Montes G.
+//Desc: Componente para dar formato a las notificaciones
 import React from 'react';
 import "../styles/notificacion.css";
 
@@ -18,5 +20,4 @@ const Notificacion = ({ nombre, contenido, imagenSrc, fechaNotificacion, horaNot
 };
 
 export default Notificacion;
-
 
