@@ -21,15 +21,16 @@ const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
   const urlOneTransax = `http://${process.env.REACT_APP_BACK_HOST}:8080/transaccion/transax/${cell}`;
   const urlLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/consultar/${cell}`;
   const urlNumLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/numLlamadasCliente/${cell}`;
+
   useEffect(() => {
     console.log("Descargando datos");
     fetch(urlCliente)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos del cliente:", data);
+        // console.log("Datos obtenidos del cliente:", data);
         const dataCliente = {
-          nombre: data[0].nombre,
-          telefono: data[0].telefono,
+          nombre: data.nombre,
+          telefono: data.telefono,
         };
         setCliente(dataCliente);
       })
@@ -38,11 +39,11 @@ const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
     fetch(urlTarjeta)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de la tarjeta:", data);
+        // console.log("Datos obtenidos de la tarjeta:", data);
         const dataTarjeta = {
-          cuenta: data[0].numCuenta,
-          tipo: data[0].tipo,
-          saldo: data[0].saldo,
+          cuenta: data.numCuenta,
+          tipo: data.tipo,
+          saldo: data.saldo,
         };
         setTarjeta(dataTarjeta);
       })
@@ -51,7 +52,7 @@ const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
     fetch(urlTransacciones)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de las transacciones:", data);
+        // console.log("Datos obtenidos de las transacciones:", data);
         const arrNuevo = data.map((transax) => {
           const transaccion = [
             transax.nombre,
@@ -77,37 +78,55 @@ const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
     fetch(urlLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Datos obtenidos de las llamadas:", data);
-        const arrNuevo = data.map((llamada) => {
-          const call = {
-            tema: llamada.tema,
-            motivo: llamada.motivo,
-            fecha:
-              llamada.fechaInicio.substring(8, 10) +
-              "/" +
-              llamada.fechaInicio.substring(5, 7) +
-              "/" +
-              llamada.fechaInicio.substring(0, 4),
-            stars: llamada.nivelSatisfaccion,
-          };
-          return call;
+        // console.log("Datos obtenidos de las llamadas:", data);
+        const arrNuevo = [];
+        data.forEach((item) => {
+          item.llamadas.forEach((llamada) => {
+            const call = {
+              tema: llamada.tema,
+              motivo: llamada.motivo,
+              fecha: `${llamada.fechaInicio.substring(
+                8,
+                10
+              )}/${llamada.fechaInicio.substring(
+                5,
+                7
+              )}/${llamada.fechaInicio.substring(0, 4)}`,
+              stars: llamada.nivelSatisfaccion,
+            };
+            arrNuevo.push(call);
+          });
         });
-        setLlamadas(arrNuevo);
+        setArrLlamadas(arrNuevo);
       })
       .catch((error) => console.log(error));
 
     fetch(urlNumLlamadas)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Número de llamadas en el mes:", data);
-        setNumLlamadas(data);
+        let contador = 0;
+        data.forEach((item) => {
+          if (item.numllamadas === 1) {
+            contador++;
+          }
+        });
+        setNumLlamadas(contador);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [urlCliente]);
 
   return (
     <ContextoInfo.Provider
-      value={[cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas]}
+      value={[
+        cliente,
+        tarjeta,
+        arrTransacciones,
+        arrLlamadas,
+        numLlamadas,
+        setCell,
+        grupoTransax,
+        transax
+      ]}
     >
       {children}
     </ContextoInfo.Provider>

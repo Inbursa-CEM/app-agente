@@ -6,6 +6,7 @@ import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
 import InfoCliente from "./AppAgente/componentes/InfoCliente";
 import Connect from "./AppAgente/componentes/Connect";
 import ProveedorInfoCliente from "./AppAgente/componentes/ProveedorInfoCliente";
+import { useState } from "react";
 
 function App() {
 
