@@ -39,7 +39,7 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
   const descargar = useCallback(async () => {
     if (!contactId) return; // Verifica que contactId no sea null
 
-    const url = `http://10.48.109.113:8080/llamada/transcripcion/${contactId}`;
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/transcripcion/${contactId}`;
 
     try {
       const response = await fetch(url);

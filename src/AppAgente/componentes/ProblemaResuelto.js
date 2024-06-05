@@ -3,8 +3,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { PieChart} from "@mui/x-charts/PieChart";
 
-export default function ProblemasResueltosPorDia(idAgente){
-    const url = `http://localhost:8080/llamada/problemasResueltos?idUsuario=${idAgente}`;
+export default function ProblemasResueltosPorDia(){
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/problemasResueltos?idUsuario=${sessionStorage.getItem("userId")}`;
     const [problemasResueltos, setProblemasResueltos] = useState(0);
     const [problemasNoResueltos, setProblemasNoResueltos] = useState(0);
     const [fecha, setFecha] = useState("");

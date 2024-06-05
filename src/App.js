@@ -11,7 +11,6 @@ function App() {
   const [time, setTime] = useState(0);
   const [contactId, setContactId] = useState(null);
   const [idTransaccion, setIdTransaccion] = useState([]);
-  const [idAgente, setIdAgente] = useState([]); 
   const [sentimientoFinal, setSentimientoFinal] = useState(null);
 
   return (
@@ -22,7 +21,7 @@ function App() {
           contactId={contactId}
           time = {time}
           setTime = {setTime}
-          idAgente={idAgente}
+          idAgente={sessionStorage.getItem("userId")}
           setSentimientoFinal = {setSentimientoFinal}
           />
         </div>
@@ -41,6 +40,7 @@ function App() {
           setTime={setTime}
           idTransaccion = {idTransaccion}
           sentimiento = {sentimientoFinal}
+          idAgente={sessionStorage.getItem("userId")}
           />
           </div>
         </ProveedorInfoCliente>

@@ -5,15 +5,12 @@ import '../styles/solicitarAyuda.css';
 import React, { useState } from "react";
 import { Button } from '@mui/material';
 
-const SolicitarAyuda = () => {
-  const [url] = useState("http://localhost:8080/notificacion/mandarSolicitudAyuda");
-  const [idAgente, setIdAgente] = useState(null);
+const SolicitarAyuda = (idAgente) => {
+  const [url] = `http://${process.env.REACT_APP_BACK_HOST}:8080/notificacion/mandarSolicitudAyuda`
   const [idSupervisor, setIdSupervisor] = useState(null);
 
   const solicitarAyuda = () => {
-    const agenteId = 2;
     const supervisorId = 1;
-    setIdAgente(agenteId);
     setIdSupervisor(supervisorId);
     console.log('Ayuda solicitada');
 

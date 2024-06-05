@@ -4,8 +4,8 @@ import * as React from "react";
 import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';
 
-export default function PromedioDuracionDia({idAgente}){
-    const url = `http://localhost:8080/llamada/promedioDuracion?idUsuario=${idAgente}`;
+export default function PromedioDuracionDia(){
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/promedioDuracion?idUsuario=${sessionStorage.getItem("userId")}`;
     const [promedioDuracion, setPromedioDuracion] = useState("");
     const [fecha, setFecha] = useState("");
     const [horas, setHoras] = useState("");
