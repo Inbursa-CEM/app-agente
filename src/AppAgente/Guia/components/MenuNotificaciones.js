@@ -5,6 +5,7 @@ import "../styles/notificacion.css";
 import Notificacion from "./Notificacion";
 import { useState, useCallback, useEffect } from "react";
 
+
 const MenuNotificaciones = () => {
   const [arrPrueba, setArrPrueba] = useState([]);
 
