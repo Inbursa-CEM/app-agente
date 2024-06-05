@@ -1,7 +1,9 @@
+// Componente que controla el estado de la llamada como por ejemplo el sentimiento, duracion para (semáforo)
+// Autor: Rosa Itzel Figueroa Rosas
+
 import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
 import feliz from '../images/feliz.PNG';
@@ -14,7 +16,9 @@ const sentimientoImagenes = {
   NEGATIVE: enojado,
 };
 
-const EstatusLlamada = ({ contactId, time, setTime }) => {
+//Iniciar llamada para postear la base de datos 
+//contactID 
+const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFinal}) => {
   const [sentimiento, setSentimiento] = useState("NEUTRAL");
 
   // UseEffect que inicializa el contador al obtener un contactId
@@ -35,7 +39,7 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
   const descargar = useCallback(async () => {
     if (!contactId) return; // Verifica que contactId no sea null
 
-    const url = `http://10.48.109.113:8080/llamada/transcripcion/${contactId}`;
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/transcripcion/${contactId}`;
 
     try {
       const response = await fetch(url);
@@ -47,6 +51,7 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
       const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
       if (latestSentiment !== sentimiento) {
         setSentimiento(latestSentiment);
+        setSentimientoFinal(latestSentiment);
       }
 
       console.log('El lastSentiment del arreglo:', latestSentiment);
@@ -64,15 +69,15 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
   }, [descargar, contactId]);
 
   // Función para formatear el tiempo
-  const tiempoFormateado = () => {
-    const minutos = Math.floor(time / 60000);
-    const segundos = Math.floor((time % 60000) / 1000);
+  // const tiempoFormateado = () => {
+  //   const minutos = Math.floor(time / 60000);
+  //   const segundos = Math.floor((time % 60000) / 1000);
 
-    const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
-    const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
+  //   const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
+  //   const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
 
-    return `${formatMinutos}:${formatSegundos}`;
-  };
+  //   return `${formatMinutos}:${formatSegundos}`;
+  // };
 
   const imagenSentimiento = sentimientoImagenes[sentimiento] || normal;
 
@@ -97,7 +102,9 @@ const EstatusLlamada = ({ contactId, time, setTime }) => {
         </div>
         <h3>{contactId}</h3>                
         <SolicitarAyuda />
-        <Estadistica />
+        <Estadistica 
+        idAgente = {idAgente}
+        />
       </div>
     </div>
   );

@@ -56,13 +56,14 @@
     background: #f1f1f1;
     padding: 14px 28px;
     border-radius: 3px;
-    max-width: 1200px;
+    max-width: 600px;
     min-width: 1000px;
 }
 
 #titulo{
   color:#012148;
-  font-size: 30px;
+  font-size: 25px;
+  margin-bottom: -6px;
 }
 
 .graficas{
@@ -80,8 +81,8 @@ grid-template-columns: 50% 50%;
 
 .duracion, .llamadas, .satisfaccion{
   background-color: rgba(102, 94, 94, 0.053);
-  padding: 10px;
-  margin: 10px;
+  padding: 5px;
+  margin: 5px;
   border-radius: 10px;
 }
 
@@ -89,7 +90,7 @@ grid-template-columns: 50% 50%;
   padding: 10px;
   background-color:  rgba(2, 4, 58, 0.75);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .pie{

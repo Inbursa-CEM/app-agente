@@ -12,6 +12,8 @@ function App() {
 
   const [time, setTime] = useState(0);
   const [contactId, setContactId] = useState(null);
+  const [idTransaccion, setIdTransaccion] = useState([]);
+  const [sentimientoFinal, setSentimientoFinal] = useState(null);
 
   return (
     <div className="App">
@@ -21,12 +23,16 @@ function App() {
           contactId={contactId}
           time = {time}
           setTime = {setTime}
+          idAgente={sessionStorage.getItem("userId")}
+          setSentimientoFinal = {setSentimientoFinal}
           />
         </div>
         <div className="contenedor2">
           <InterfazGuia/>
         </div>
-        <ProveedorInfoCliente>
+        <ProveedorInfoCliente         
+        setIdTransaccion = {setIdTransaccion}
+        >
         <div className="contenedor3">
             <InfoCliente />
         </div>
@@ -34,6 +40,9 @@ function App() {
           <Connect
           setContactId = {setContactId}
           setTime={setTime}
+          idTransaccion = {idTransaccion}
+          sentimiento = {sentimientoFinal}
+          idAgente={sessionStorage.getItem("userId")}
           />
           </div>
         </ProveedorInfoCliente>

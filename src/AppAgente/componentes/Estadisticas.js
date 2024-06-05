@@ -1,3 +1,6 @@
+// Componente que solicita las estadísticas por el agente y las despliega con graficas y elementos visuales
+// Autor: Rosa Itzel Figueroa Rosas
+
 import '../styles/estadisticas.css'
 import React, { useState } from 'react'
 import { Button } from '@mui/material';
@@ -5,7 +8,7 @@ import PromedioDuracionDia from './PromedioDuracionDia';
 import NumLlamadas from './NumLlamadas';
 import ProblemasResueltos from './ProblemaResuelto';
 
-const Estadisticas = () => {
+const Estadisticas = ({idAgente}) => {
 
     const [modal, setModal] = useState(false);
 
@@ -31,31 +34,27 @@ const Estadisticas = () => {
                     <div className='modal-content'>
                         <h2 id='titulo'>Estadísticas</h2>
                         <div className='graficas'>
-                            {/* <div className='agente' >
-                                <div className='cali'>
-                                    <h3>Calificación</h3>
-                                    <canvas id='calificacion'></canvas>
-                                </div>
-                                <div className='problemas'>
-                                    <h3>Problemas resueltos satifactoriamente</h3>
-                                    <canvas id='problemas'></canvas>
-                                </div>
-                            </div> */}
                             <div className='llamadas'>
                                 <h3>Número de llamadas por día</h3>
                                 <br></br>
-                                <NumLlamadas/>
+                                <NumLlamadas
+                                idAgente = {idAgente}
+                                />
                             </div>  
                             <div className='satisfaccion'>
                                 <h3>Efectividad de resolución de problemas</h3>
-                                <ProblemasResueltos/>
+                                <ProblemasResueltos
+                                idAgente = {idAgente}
+                                />
                             </div>  
                             <div className='duracion'>
                                 <h3>Duración promedio de llamadas por día</h3>
-                                <PromedioDuracionDia/>
+                                <PromedioDuracionDia
+                                idAgente = {idAgente}
+                                />
                             </div>  
                         </div>
-                        <Button onClick={abrirModal} className="close-modal">Cerrar</Button>
+                        {/* <Button onClick={abrirModal} className="close-modal">Cerrar</Button> */}
                     </div>
                 </div>
             </div>   )}

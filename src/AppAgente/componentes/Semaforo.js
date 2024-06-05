@@ -1,4 +1,5 @@
-// import React, { useState } from 'react';
+// Componente que controla el cambio de color del semaforo dependiento del tiempo de la llamada
+// Autor: Rosa Itzel Figueroa Rosas
 import '../styles/semaforo.css';
 
 const Semaforo = ({tiempo}) => {
