@@ -1,3 +1,6 @@
+// Componente visual que despliega el número de llamadas diarias que lleva el agente
+// Autor: Rosa Itzel Figueroa Rosas
+
 import * as React from "react";
 import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';

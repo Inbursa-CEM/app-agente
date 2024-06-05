@@ -1,3 +1,6 @@
+// Muestra el componente de connect y controla el flujo de datos al inicio y final de la llamada
+// Autores: Alan Alcántara Ávila, Rosa Itzel Figueroa Rosas
+
 import "amazon-connect-streams";
 import React, { useContext, useEffect, useState } from 'react';
 import { ContextoInfo } from "./ProveedorInfoCliente";
@@ -11,16 +14,14 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
 
 
   //Funciones para guardar los datos de la llamada en la base de datos 
-  const inicializaLlamada = () =>{
+  const inicializaLlamada = (contactId) =>{
     const request = {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idUsuario: 2,
-        // idUsuario: idAgente,
-        idTransaccion: 3, 
-        contactId: contacto
-        // contactId: contactId
+        idUsuario: idAgente,
+        idTransaccion: idTransaccion, 
+        contactId: contactId
       })
     };
 
@@ -35,14 +36,14 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
     });
   }
 
-  const finalizaLlamada = () =>{
+  const finalizaLlamada = (contactId) =>{
+    console.log("entre a finaliza")
     const request = {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        // idLlamada: "110",
         sentimiento: sentimiento, 
-        contactId: contacto
+        contactId: contactId
       })
     };
 
@@ -110,7 +111,9 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       //Cuando la llamada termine se deben de restablecer los parametros
       //Hacer que se haga un update de la llamada una vez que se acabe
       contact.onEnded(async function (contact){
-        finalizaLlamada(contact.getContactId())
+        console.log("Contact de finaliza:", contact.getContactId())
+        await finalizaLlamada(contact.getContactId());
+        setContacto(null)
         setContactId(null)
         setTime(0)
       });
@@ -120,7 +123,7 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
 
   useEffect(() =>{
     if (contacto !== null){
-      inicializaLlamada();//Se guardan los datos del inicio de la llamada en la bd
+      inicializaLlamada(contacto);//Se guardan los datos del inicio de la llamada en la bd
     }
   }, [contacto])
 

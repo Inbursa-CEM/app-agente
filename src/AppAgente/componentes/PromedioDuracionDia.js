@@ -1,3 +1,5 @@
+// Componente visual que depliegua el promedio de duración de las llamadas de una agente por día
+// Autor: Rosa Itzel Figueroa Rosas
 import * as React from "react";
 import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';

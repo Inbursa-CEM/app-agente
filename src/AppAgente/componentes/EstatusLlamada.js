@@ -1,7 +1,9 @@
+// Componente que controla el estado de la llamada como por ejemplo el sentimiento, duracion para (semáforo)
+// Autor: Rosa Itzel Figueroa Rosas
+
 import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
 import feliz from '../images/feliz.PNG';
@@ -67,15 +69,15 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
   }, [descargar, contactId]);
 
   // Función para formatear el tiempo
-  const tiempoFormateado = () => {
-    const minutos = Math.floor(time / 60000);
-    const segundos = Math.floor((time % 60000) / 1000);
+  // const tiempoFormateado = () => {
+  //   const minutos = Math.floor(time / 60000);
+  //   const segundos = Math.floor((time % 60000) / 1000);
 
-    const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
-    const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
+  //   const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
+  //   const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
 
-    return `${formatMinutos}:${formatSegundos}`;
-  };
+  //   return `${formatMinutos}:${formatSegundos}`;
+  // };
 
   const imagenSentimiento = sentimientoImagenes[sentimiento] || normal;
 

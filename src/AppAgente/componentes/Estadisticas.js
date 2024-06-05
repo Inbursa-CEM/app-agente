@@ -1,3 +1,6 @@
+// Componente que solicita las estadísticas por el agente y las despliega con graficas y elementos visuales
+// Autor: Rosa Itzel Figueroa Rosas
+
 import '../styles/estadisticas.css'
 import React, { useState } from 'react'
 import { Button } from '@mui/material';
