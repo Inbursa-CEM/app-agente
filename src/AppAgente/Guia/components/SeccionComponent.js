@@ -1,16 +1,32 @@
-// SeccionComponent.js
+//Autor: Arturo Montes G.
+//Desc: componente para renderear secciones con animacion
 import React, { useRef, useState } from 'react';
 import SubtituloComponent from './SubtituloComponent';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import DOMPurify from 'dompurify';
 import '../styles/animations.css';
-import '../styles/styles.css'
+import '../styles/styles.css';
 
-const SeccionComponent = ({ seccion }) => {
-  const [show, setShow] = useState(false);
+const SeccionComponent = ({ seccionIndex, seccion, searchString }) => {
+  //Desc: si se ense;a o se oculta hay una animacion, tambien se marca el texto 
+  //buscado por el usuario.
+  const [show, setShow] = useState(true);
   const nodeRef = useRef(null);
+
+  const resaltarTexto = (text) => {
+    if (!searchString) return text; 
+
+    const regex = new RegExp(`(${searchString})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  };
+
+  const sanitizarHTML = (html) => {
+    return DOMPurify.sanitize(html);
+  };
+
   return (
     <div className='seccion'>
-      <h2 onClick={() => setShow(!show)}>{seccion.titulo}</h2>
+      <h2 style={{ marginLeft:'-20px', userSelect: 'none', fontSize: '1.3rem' }} onClick={() => setShow(!show)} dangerouslySetInnerHTML={{__html: sanitizarHTML(resaltarTexto(`${seccionIndex + 1}. ${seccion.titulo}${show? "⏷": "⏶"}`))}} />
       <SwitchTransition mode="out-in">
         <CSSTransition
           key={show ? 'show' : 'hide'}
@@ -19,10 +35,9 @@ const SeccionComponent = ({ seccion }) => {
           classNames="fade"
         >
           <div style={{userSelect: 'none'}} ref={nodeRef}>
-
             {show &&
               seccion.subtitulos.map((subtitulo, index) => (
-                <SubtituloComponent key={index} subtitulo={subtitulo} />
+                <SubtituloComponent key={index} seccionIndex={seccionIndex} subtituloIndex={index} subtitulo={subtitulo} searchString={searchString} />
               ))
             }
           </div>

@@ -6,9 +6,9 @@ import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
 import InfoCliente from "./AppAgente/componentes/InfoCliente";
 import Connect from "./AppAgente/componentes/Connect";
 import ProveedorInfoCliente from "./AppAgente/componentes/ProveedorInfoCliente";
-import React, { useState} from 'react';
 
 function App() {
+
 
   const [time, setTime] = useState(0);
   const [contactId, setContactId] = useState(null);
@@ -34,7 +34,9 @@ function App() {
         setIdTransaccion = {setIdTransaccion}
         >
         <div className="contenedor3">
+          <ProveedorInfoCliente>
             <InfoCliente />
+          </ProveedorInfoCliente>
         </div>
         <div className="contenedor4">
           <Connect

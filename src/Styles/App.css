@@ -34,7 +34,7 @@
 }
 
 .contenedor2 {
-  background-color: rgb(221, 232, 243);
+  background-color: #E3E1E8;
   border-radius: 15px;
   height: 700px;
   width: 500px;
@@ -48,6 +48,7 @@
   height: 305px;
   margin-left: -1px;
 }
+
 
 .contenedor4{
   margin-top: -705px;

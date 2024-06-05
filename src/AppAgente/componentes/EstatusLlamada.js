@@ -6,6 +6,8 @@ import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
+
+
 import feliz from '../images/feliz.PNG';
 import normal from '../images/normal.PNG';
 import enojado from '../images/enojado.PNG';
@@ -35,9 +37,9 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
     }
   }, [contactId, setTime]);
 
-  // Descargar la transcripción
-  const descargar = useCallback(async () => {
-    if (!contactId) return; // Verifica que contactId no sea null
+
+    const [tiempo, setTiempo] = useState(0);
+    const [corriendo, setCorriendo] = useState(false);
 
     const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/transcripcion/${contactId}`;
 
@@ -53,20 +55,28 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
         setSentimiento(latestSentiment);
         setSentimientoFinal(latestSentiment);
       }
+    const obtenerClaseTiempo = () => {
+        if (tiempo < 46000) {
+            return 'bueno';
+        } else if (tiempo >= 46000 && tiempo < 60000) {
+            return 'normal';
+        } else {
+            return 'malo';
+        }
+    };
 
-      console.log('El lastSentiment del arreglo:', latestSentiment);
-    } catch (error) {
-      console.error('Error al descargar los datos:', error);
-    }
-  }, [contactId, sentimiento]);
+    //Solicitar el numero de telefono
+    // const descargar = useCallback(
+    //     () => {
+    //       console.log("Descargando datos");
+    //       fetch('/api')
+    //       .then((response) => response.json())
+    //       .then((data) => {
+    //       //Manejo de datos
+    //       })
+    //       .catch((error) => console.log(error));
+    //     },);
 
-  // UseEffect que descarga los datos cada 3 segundos si contactId está disponible
-  useEffect(() => {
-    if (contactId) {
-      const interval = setInterval(descargar, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [descargar, contactId]);
 
   // Función para formatear el tiempo
   // const tiempoFormateado = () => {
@@ -93,12 +103,6 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
             <div className='sentimiento'>
               <img src={imagenSentimiento} alt="sentimiento" className='sentimiento' />
             </div>
-            <div>
-              <Semaforo
-                tiempo={time}
-                />
-            </div>
-          </div>
         </div>
         <h3>{contactId}</h3>                
         <SolicitarAyuda />

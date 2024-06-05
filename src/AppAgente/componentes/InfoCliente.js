@@ -9,10 +9,8 @@ import { useContext } from "react";
 import { ContextoInfo } from "./ProveedorInfoCliente";
 
 const Contenedor = () => {
-  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas, , grupoTransax, transax] =
+  const [cliente, tarjeta, arrTransacciones, arrLlamadas, numLlamadas] =
     useContext(ContextoInfo);
-  let indice = 0;
-
   // Busca el índice de la transacción actual
   for (let i = 0; i < grupoTransax.length; i++) {
     if (grupoTransax[i].idTransaccion === transax.idTransaccion) {
@@ -33,9 +31,10 @@ const Contenedor = () => {
       />
       <Transacciones
         listaTransax={arrTransacciones}
-        elementoDestacadoIndex={indice}
+        // FALTANTE
+        elementoDestacadoIndex={2}
       />
-      <Llamadas numLlamadas={numLlamadas} listaLlamadas={arrLlamadas} />
+      <Llamadas numLlamadas={numCalls} listaLlamadas={arrLlamadas} />
     </div>
   );
 };
