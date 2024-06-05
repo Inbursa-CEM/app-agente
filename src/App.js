@@ -1,3 +1,5 @@
+// Este archivo contiene la estructura de la aplicación, en el se encuentran los componentes que se renderizan en la interfaz de usuario.
+
 import EstatusLlamada from "./AppAgente/componentes/EstatusLlamada";
 import "./Styles/App.css";
 import InterfazGuia from "./AppAgente/Guia/components/InterfazGuia";
@@ -17,7 +19,7 @@ function App() {
     <div className="App">
       <div className="interfaz">
         <div className="contenedor">
-          <EstatusLlamada 
+          <EstatusLlamada
           contactId={contactId}
           time = {time}
           setTime = {setTime}
@@ -36,7 +38,7 @@ function App() {
         </div>
         <div className="contenedor4">
           <Connect
-          setContactId = {setContactId} 
+          setContactId = {setContactId}
           setTime={setTime}
           idTransaccion = {idTransaccion}
           sentimiento = {sentimientoFinal}

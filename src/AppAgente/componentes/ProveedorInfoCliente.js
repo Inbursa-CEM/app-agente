@@ -1,3 +1,7 @@
+// Autor: Alan Alcántara
+// Proveedor de la información del cliente para mostrarla en la interfaz
+// Llamadas al API para descargar los datos del cliente
+
 import { createContext, useState, useEffect } from "react";
 
 export const ContextoInfo = createContext(); // Espacio global
@@ -11,15 +15,12 @@ const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
   const [transax, setTransax] = useState([]);
   const [arrLlamadas, setArrLlamadas] = useState([]);
   const [numLlamadas, setNumLlamadas] = useState(0);
-  const urlCliente = "http://localhost:8080/cliente/consultar/" + cell;
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar/" + cell;
-  const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar/" + cell;
-  const urlOneTransax =
-    "http://localhost:8080/transaccion/transax/" + cell;
-  const urlLlamadas = "http://localhost:8080/llamada/consultar/" + cell;
-  const urlNumLlamadas =
-    "http://localhost:8080/llamada/numLlamadasCliente/" + cell;
+  const urlCliente = `http://${process.env.REACT_APP_BACK_HOST}:8080/cliente/consultar/${cell}`;
+  const urlTarjeta = `http://${process.env.REACT_APP_BACK_HOST}:8080/tarjeta/consultar/${cell}`;
+  const urlTransacciones = `http://${process.env.REACT_APP_BACK_HOST}:8080/transaccion/consultar/${cell}`;
+  const urlOneTransax = `http://${process.env.REACT_APP_BACK_HOST}:8080/transaccion/transax/${cell}`;
+  const urlLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/consultar/${cell}`;
+  const urlNumLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/numLlamadasCliente/${cell}`;
 
   useEffect(() => {
     console.log("Descargando datos");

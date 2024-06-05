@@ -1,5 +1,5 @@
-// Muestra el componente de connect y controla el flujo de datos al inicio y final de la llamada
-// Autores: Alan Alcántara Ávila, Rosa Itzel Figueroa Rosas
+// Autores: Alan Alcántara Ávila y Rosa Itzel Figueroa Rosas
+// Interfaz de amazon connect con sus funciones de inicio y finalización de llamada
 
 import "amazon-connect-streams";
 import React, { useContext, useEffect, useState } from 'react';
@@ -101,13 +101,12 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
         setContactId(cid); // Aquí se llama a setContactId con el valor de cid
         setContacto(cid)
         console.log("Contact ID:", cid);
-        var attributeMap = contact.getAttributes();
         const number = contact.getInitialConnection().getEndpoint().phoneNumber;
         // console.log("Número de telefono: ", number);
         setCell(number);
 
       });
-      
+
       //Cuando la llamada termine se deben de restablecer los parametros
       //Hacer que se haga un update de la llamada una vez que se acabe
       contact.onEnded(async function (contact){

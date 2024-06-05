@@ -1,5 +1,5 @@
-// Componente que muestra los datos del cliente
-// Autor: Alan Alcántara Ávila
+// Autor: Alan Alcántara
+// Componente que muestra los datos del cliente en la interfaz
 
 import ListItemText from "@mui/material/ListItemText";
 import "../styles/infoCliente.css";

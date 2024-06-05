@@ -1,5 +1,5 @@
+// Autor: Alan Alcántara
 // Componente que muestra las últimas llamadas realizadas por el cliente
-// Autor: Alan Alcántara Ávila
 
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
