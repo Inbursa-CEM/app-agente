@@ -5,20 +5,21 @@ import '../styles/solicitarAyuda.css';
 import React, { useState } from "react";
 import { Button } from '@mui/material';
 
-const SolicitarAyuda = (idAgente) => {
-  const [url] = `http://${process.env.REACT_APP_BACK_HOST}:8080/notificacion/mandarSolicitudAyuda`
-  const [idSupervisor, setIdSupervisor] = useState(null);
+const SolicitarAyuda = () => { //idAgente
+  const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/notificacion/mandarSolicitudAyuda`
+  // const [idSupervisor, setIdSupervisor] = useState(null);
 
   const solicitarAyuda = () => {
-    const supervisorId = 1;
-    setIdSupervisor(supervisorId);
+    // const supervisorId = 1;
+    const idAgente = 2;
+    // setIdSupervisor(supervisorId);
     console.log('Ayuda solicitada');
 
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idUsuario: idSupervisor,
+        idUsuario: 1,
         contenido: `El agente ${idAgente} solicitó ayuda.`
       })
     };

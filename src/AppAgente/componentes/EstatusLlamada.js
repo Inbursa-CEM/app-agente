@@ -43,7 +43,7 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
 
     try {
       const response = await fetch(url);
-      console.log(url);
+      console.log(url, "se descargo los datos de transcripcion");
       const data = await response.json();
       console.log('Data recibida del endpoint', data);
       const sentiments = data[0]?.Segments.map(segment => segment.Transcript.Sentiment);
