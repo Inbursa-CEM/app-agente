@@ -1,13 +1,9 @@
-import React, { useState, useEffect} from 'react';
+// Componente que controla el estado de la llamada como por ejemplo el sentimiento, duracion para (semáforo)
+// Autor: Rosa Itzel Figueroa Rosas
+
+import React, { useState, useEffect, useCallback } from 'react';
 import '../styles/estatusLlamada.css';
 import Semaforo from './Semaforo';
-// import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-// import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-// import PauseSharpIcon from '@mui/icons-material/PauseSharp';
-// import VolumeOffSharpIcon from '@mui/icons-material/VolumeOffSharp';
-// import CallEndSharpIcon from '@mui/icons-material/CallEndSharp';
-// import { Button } from '@mui/material';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Estadistica from "../componentes/Estadisticas";
 import SolicitarAyuda from "../componentes/SolicitarAyuda";
 
@@ -16,51 +12,49 @@ import feliz from '../images/feliz.PNG';
 import normal from '../images/normal.PNG';
 import enojado from '../images/enojado.PNG';
 
-const EstatusLlamada = () => {
-    const [sentimiento, setSentimiento] = useState(normal);
+const sentimientoImagenes = {
+  NEUTRAL: normal,
+  POSITIVE: feliz,
+  NEGATIVE: enojado,
+};
+
+//Iniciar llamada para postear la base de datos 
+//contactID 
+const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFinal}) => {
+  const [sentimiento, setSentimiento] = useState("NEUTRAL");
+
+  // UseEffect que inicializa el contador al obtener un contactId
+  useEffect(() => {
+    if (contactId !== null) {
+      console.log('Contact ID not null, starting timer');
+      const interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1000); // Incrementa el tiempo cada segundo
+      }, 1000);
+      return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente o cambiar contactId
+    } else {
+      console.log('Contact ID null, resetting timer');
+      setTime(0);
+    }
+  }, [contactId, setTime]);
+
 
     const [tiempo, setTiempo] = useState(0);
     const [corriendo, setCorriendo] = useState(false);
 
-    const cambiarSentimiento = () => {
-        if (sentimiento === feliz) {
-            setSentimiento(normal);
-        } else if (sentimiento === normal) {
-            setSentimiento(enojado);
-        } else {
-            setSentimiento(feliz);
-        }
-    };
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/transcripcion/${contactId}`;
 
-    const toggleContador = () => {
-        setCorriendo(!corriendo);
-        // setTiempo(0); // Reiniciar el tiempo cuando se inicia el contador
-    };
-    
-    useEffect(() => {
-        let intervalId;
-    
-        if (corriendo) {
-            intervalId = setInterval(() => {
-                setTiempo(tiempo => tiempo + 10); 
-            }, 10); 
-        } else {
-            clearInterval(intervalId);
-        }
-    
-        return () => clearInterval(intervalId);
-    }, [corriendo]);
-    
-    const tiempoFormateado = () => {
-        const minutos = Math.floor(tiempo / 60000);
-        const segundos = Math.floor((tiempo % 60000) / 1000);
-    
-        const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
-        const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
-    
-        return `${formatMinutos}:${formatSegundos}`;
-    };
-
+    try {
+      const response = await fetch(url);
+      console.log(url);
+      const data = await response.json();
+      console.log('Data recibida del endpoint', data);
+      const sentiments = data[0]?.Segments.map(segment => segment.Transcript.Sentiment);
+      console.log("El arreglo de sentimientos es:", sentiments);
+      const latestSentiment = sentiments ? sentiments[sentiments.length - 1] : 'NEUTRAL';
+      if (latestSentiment !== sentimiento) {
+        setSentimiento(latestSentiment);
+        setSentimientoFinal(latestSentiment);
+      }
     const obtenerClaseTiempo = () => {
         if (tiempo < 46000) {
             return 'bueno';
@@ -83,48 +77,41 @@ const EstatusLlamada = () => {
     //       .catch((error) => console.log(error));
     //     },);
 
-    //Solicitar el sentimiento de connect
 
-    return (
-        <div className='llamada'>
-            {/* <div className='columnaE'>
-                <div className='estatus'>
-                    <div className='columnat'>
-                        <LocalPhoneIcon className='icon' />
-                        <h3 className='tel' id='tel'>+52 5577499543</h3>
-                    </div>
-                    <div className={`${obtenerClaseTiempo()}`} id='tiempo' onClick={toggleContador}>
-                        <AccessTimeFilledIcon /> <h3>{tiempoFormateado(tiempo)}</h3>
-                    </div>
-                </div>
-                <div className='control'>
-                    <div className='columna'>
-                        <Button className='espera'> <PauseSharpIcon className='callIcon' /> Espera</Button>
-                        <Button className='silenciar'><VolumeOffSharpIcon className='callIcon' /> Silenciar</Button>
-                    </div>
-                    <br></br>
-                    <Button className='terminar'><CallEndSharpIcon className='callIcon' />Terminar llamada</Button>
-                </div>
-            </div> */}
+  // Función para formatear el tiempo
+  // const tiempoFormateado = () => {
+  //   const minutos = Math.floor(time / 60000);
+  //   const segundos = Math.floor((time % 60000) / 1000);
 
-            <div className='columnaE'>
-                <div className='labelEstado'><h3>Estado de llamada</h3></div>
-                <div className='normal' id='tiempo'>
-                        <AccessTimeFilledIcon /> <h3> 1:57:03</h3>
-                    </div>
-                <div className='estado'>
-                    <div className='columna'>
-                        <div className='sentimiento'>
-                            <img src={sentimiento} alt="sentimiento" className='sentimiento' onClick={cambiarSentimiento} />
-                        </div>
-                        <Semaforo tiempo={tiempo} />                    </div>
-                </div>
-                <SolicitarAyuda/>
-                <Estadistica/>
+  //   const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
+  //   const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
+
+  //   return `${formatMinutos}:${formatSegundos}`;
+  // };
+
+  const imagenSentimiento = sentimientoImagenes[sentimiento] || normal;
+
+  return (
+    <div className='llamada'>
+      <div className='columnaE'>
+        <div className='labelEstado'><h3>Estado de llamada</h3></div>
+        {/* <div className='normal' id='tiempo'>
+          <AccessTimeFilledIcon /> <h3>{tiempoFormateado()}</h3>
+        </div> */}
+        <div className='estado'>
+          <div className='columna'>
+            <div className='sentimiento'>
+              <img src={imagenSentimiento} alt="sentimiento" className='sentimiento' />
             </div>
         </div>
-
-    )
-}
+        <h3>{contactId}</h3>                
+        <SolicitarAyuda />
+        <Estadistica 
+        idAgente = {idAgente}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default EstatusLlamada;

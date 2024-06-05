@@ -1,8 +1,62 @@
-import "amazon-connect-streams";
-import React, { useEffect } from 'react';
+// Autores: Alan Alcántara Ávila y Rosa Itzel Figueroa Rosas
+// Interfaz de amazon connect con sus funciones de inicio y finalización de llamada
 
-const Connect = () => {
-  //Variables to assing the call id and the status of the call
+import "amazon-connect-streams";
+import React, { useContext, useEffect, useState } from 'react';
+import { ContextoInfo } from "./ProveedorInfoCliente";
+
+const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente}) => {
+  // Contexto de proveedor de información
+  const [ , , , , , setCell, , ] = useContext(ContextoInfo);
+  const [url] = useState("http://localhost:8080/llamada/inicioLlamada");
+  const [urlFin] = useState("http://localhost:8080/llamada/finLlamada");
+  const [contacto, setContacto] = useState("")
+
+
+  //Funciones para guardar los datos de la llamada en la base de datos 
+  const inicializaLlamada = (contactId) =>{
+    const request = {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idUsuario: idAgente,
+        idTransaccion: idTransaccion, 
+        contactId: contactId
+      })
+    };
+
+    fetch(url, request)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Respuesta del servidor:', data);
+      console.log(request)
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+  }
+
+  const finalizaLlamada = (contactId) =>{
+    console.log("entre a finaliza")
+    const request = {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sentimiento: sentimiento, 
+        contactId: contactId
+      })
+    };
+
+    fetch(urlFin, request)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Respuesta del servidor:', data);
+      console.log(request)
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+  }
 
   // Code to embed the Amazon Connect CCP
   useEffect(() => {
@@ -37,20 +91,40 @@ const Connect = () => {
       ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
     });
 
+    
     // Code to be executed once a call starts
     // eslint-disable-next-line no-undef
     connect.contact(function (contact) {
       contact.onConnected(async function (contact) {
         let cid = contact.getContactId();
         console.log(cid);
-        var attributeMap = contact.getAttributes();
-        console.log(attributeMap);
-        // var number = contact.getAttributes().customerNumber;
-        // console.log("NUMERO" + number);
+        setContactId(cid); // Aquí se llama a setContactId con el valor de cid
+        setContacto(cid)
+        console.log("Contact ID:", cid);
+        const number = contact.getInitialConnection().getEndpoint().phoneNumber;
+        // console.log("Número de telefono: ", number);
+        setCell(number);
+
+      });
+
+      //Cuando la llamada termine se deben de restablecer los parametros
+      //Hacer que se haga un update de la llamada una vez que se acabe
+      contact.onEnded(async function (contact){
+        console.log("Contact de finaliza:", contact.getContactId())
+        await finalizaLlamada(contact.getContactId());
+        setContacto(null)
+        setContactId(null)
+        setTime(0)
       });
     });
 
   }, []);
+
+  useEffect(() =>{
+    if (contacto !== null){
+      inicializaLlamada(contacto);//Se guardan los datos del inicio de la llamada en la bd
+    }
+  }, [contacto])
 
   return <div id="ccp" style={{ width: "680px", height: "350px" }}></div>;
 };

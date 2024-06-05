@@ -1,9 +1,11 @@
+// Componente visual que depliegua el promedio de duración de las llamadas de una agente por día
+// Autor: Rosa Itzel Figueroa Rosas
 import * as React from "react";
 import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';
 
 export default function PromedioDuracionDia(){
-    const [url, setUrl] = useState("http://10.48.109.113:8080/llamada/promedioDuracion?idUsuario=2");
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/promedioDuracion?idUsuario=${sessionStorage.getItem("userId")}`;
     const [promedioDuracion, setPromedioDuracion] = useState("");
     const [fecha, setFecha] = useState("");
     const [horas, setHoras] = useState("");

@@ -1,20 +1,26 @@
+// Autor: Alan Alcántara
+// Proveedor de la información del cliente para mostrarla en la interfaz
+// Llamadas al API para descargar los datos del cliente
+
 import { createContext, useState, useEffect } from "react";
 
 export const ContextoInfo = createContext(); // Espacio global
 
-const ProveedorInfoCliente = ({ children }) => {
+const ProveedorInfoCliente = ({ children, setIdTransaccion }) => {
+  const [cell, setCell] = useState("");
   const [cliente, setCliente] = useState([]);
   const [tarjeta, setTarjeta] = useState([]);
   const [arrTransacciones, setTransacciones] = useState([]);
-  const [arrLlamadas, setLlamadas] = useState([]);
-  const [numLlamadas, setNumLlamadas] = useState([]);
-  const urlCliente = "http://localhost:8080/cliente/consultar?id=1";
-  const urlTarjeta = "http://localhost:8080/tarjeta/consultar?id=1";
-  const urlTransacciones =
-    "http://localhost:8080/transaccion/consultar?numCuenta=123456";
-  const urlLlamadas = "http://localhost:8080/llamada/consultar";
-  const urlNumLlamadas = "http://localhost:8080/llamada/numLlamadas?idUsuario=1";
-
+  const [grupoTransax, setGrupoTransax] = useState([]);
+  const [transax, setTransax] = useState([]);
+  const [arrLlamadas, setArrLlamadas] = useState([]);
+  const [numLlamadas, setNumLlamadas] = useState(0);
+  const urlCliente = `http://${process.env.REACT_APP_BACK_HOST}:8080/cliente/consultar/${cell}`;
+  const urlTarjeta = `http://${process.env.REACT_APP_BACK_HOST}:8080/tarjeta/consultar/${cell}`;
+  const urlTransacciones = `http://${process.env.REACT_APP_BACK_HOST}:8080/transaccion/consultar/${cell}`;
+  const urlOneTransax = `http://${process.env.REACT_APP_BACK_HOST}:8080/transaccion/transax/${cell}`;
+  const urlLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/consultar/${cell}`;
+  const urlNumLlamadas = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/numLlamadasCliente/${cell}`;
   useEffect(() => {
     console.log("Descargando datos");
     fetch(urlCliente)
@@ -55,6 +61,16 @@ const ProveedorInfoCliente = ({ children }) => {
           return transaccion;
         });
         setTransacciones(arrNuevo);
+        setGrupoTransax(data);
+      })
+      .catch((error) => console.log(error));
+
+    fetch(urlOneTransax)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("Transacción requerida:", data);
+        setTransax(data);
+        setIdTransaccion(data);
       })
       .catch((error) => console.log(error));
 

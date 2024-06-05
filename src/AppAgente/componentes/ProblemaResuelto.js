@@ -1,8 +1,10 @@
+// Componente que la gráfica del porcentaje de problemas resuelto del agente por día
+// Autor: Rosa Itzel Figueroa Rosas
 import React, { useState, useCallback, useEffect } from "react";
-import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import { PieChart} from "@mui/x-charts/PieChart";
 
 export default function ProblemasResueltosPorDia(){
-    const [url, setUrl] = useState("http://10.48.109.113:8080/llamada/problemasResueltos?idUsuario=2");
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/problemasResueltos?idUsuario=${sessionStorage.getItem("userId")}`;
     const [problemasResueltos, setProblemasResueltos] = useState(0);
     const [problemasNoResueltos, setProblemasNoResueltos] = useState(0);
     const [fecha, setFecha] = useState("");
@@ -27,10 +29,10 @@ export default function ProblemasResueltosPorDia(){
     const porcentajeResueltos = (problemasResueltos / totalProblemas) * 100;
     const porcentajeNoResueltos = (problemasNoResueltos / totalProblemas) * 100;
 
-    const data = [
-        { label: "Problemas Resueltos", value: porcentajeResueltos },
-        { label: "Problemas No Resueltos", value: porcentajeNoResueltos }
-    ];
+    // const data = [
+    //     { label: "Problemas Resueltos", value: porcentajeResueltos },
+    //     { label: "Problemas No Resueltos", value: porcentajeNoResueltos }
+    // ];
 
     return(
         <div>

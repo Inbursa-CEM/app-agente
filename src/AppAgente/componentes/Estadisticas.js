@@ -1,3 +1,6 @@
+// Componente que solicita las estadísticas por el agente y las despliega con graficas y elementos visuales
+// Autor: Rosa Itzel Figueroa Rosas
+
 import '../styles/estadisticas.css'
 import React, { useState } from 'react'
 import { Button } from '@mui/material';
@@ -5,7 +8,7 @@ import PromedioDuracionDia from './PromedioDuracionDia';
 import NumLlamadas from './NumLlamadas';
 import ProblemasResueltos from './ProblemaResuelto';
 
-const Estadisticas = () => {
+const Estadisticas = ({idAgente}) => {
 
     const [modal, setModal] = useState(false);
 
@@ -34,15 +37,21 @@ const Estadisticas = () => {
                             <div className='llamadas'>
                                 <h3>Número de llamadas por día</h3>
                                 <br></br>
-                                <NumLlamadas/>
+                                <NumLlamadas
+                                idAgente = {idAgente}
+                                />
                             </div>  
                             <div className='satisfaccion'>
                                 <h3>Efectividad de resolución de problemas</h3>
-                                <ProblemasResueltos/>
+                                <ProblemasResueltos
+                                idAgente = {idAgente}
+                                />
                             </div>  
                             <div className='duracion'>
                                 <h3>Duración promedio de llamadas por día</h3>
-                                <PromedioDuracionDia/>
+                                <PromedioDuracionDia
+                                idAgente = {idAgente}
+                                />
                             </div>  
                         </div>
                         {/* <Button onClick={abrirModal} className="close-modal">Cerrar</Button> */}
