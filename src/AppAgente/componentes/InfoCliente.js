@@ -32,8 +32,7 @@ const Contenedor = () => {
       />
       <Transacciones
         listaTransax={arrTransacciones}
-        // FALTANTE
-        elementoDestacadoIndex={2}
+        elementoDestacadoIndex={indice}
       />
       <Llamadas numLlamadas={numLlamadas} listaLlamadas={arrLlamadas} />
     </div>
