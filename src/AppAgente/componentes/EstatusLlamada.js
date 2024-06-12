@@ -86,7 +86,9 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
           </div>
         </div>
         <h3>{contactId}</h3>                
-        <SolicitarAyuda />
+        <SolicitarAyuda 
+        idAgente = {idAgente}
+        />
         <Estadistica 
         idAgente = {idAgente}
         />
