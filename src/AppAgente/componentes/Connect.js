@@ -13,14 +13,15 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
   const [contacto, setContacto] = useState("")
 
 
-  //Funciones para guardar los datos de la llamada en la base de datos
+  //Funciones encargada de mandar los datos del inicio de llamada en la base de datos 
+
   const inicializaLlamada = (contactId) =>{
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         idUsuario: 2,
-        idTransaccion: 1,
+        idTransaccion: 2, 
         contactId: contactId
       })
     };
@@ -36,6 +37,7 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
     });
   }
 
+  //Función encargada de actualizar los datos de fin de llamada en la base de datos
   const finalizaLlamada = (contactId) =>{
     console.log("entre a finaliza")
     const request = {
@@ -107,8 +109,8 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
 
       });
 
-      //Cuando la llamada termine se deben de restablecer los parametros
-      //Hacer que se haga un update de la llamada una vez que se acabe
+      //Funcion que se encarga de avisar que ha terminado la llamada 
+      //y ayuda a set null variables para la próxima llamada
       contact.onEnded(async function (contact){
         console.log("Contact de finaliza:", contact.getContactId())
         await finalizaLlamada(contact.getContactId());
@@ -120,6 +122,7 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
 
   }, []);
 
+  //UseEffect encargado de estar esperando a que contact deje de ser nulo para llamar a la funcion de inicioLlamada
   useEffect(() =>{
     if (contacto !== null){
       inicializaLlamada(contacto);//Se guardan los datos del inicio de la llamada en la bd

@@ -10,7 +10,7 @@ export default function PromedioDuracionDia(){
     const [numLlamadas, setNumLlamadas] = useState("");
     const [fecha, setFecha] = useState("");
 
-
+    //Funcion encargada de descargar los datos del numero de llamada 
     const descargar = useCallback(() => {
         console.log("Descargando datos")
         fetch(url)
