@@ -5,17 +5,11 @@ import '../styles/solicitarAyuda.css';
 import React, { useState } from "react";
 import { Button } from '@mui/material';
 
-const SolicitarAyuda = () => { //idAgente
+const SolicitarAyuda = ({idAgente}) => { //idAgente
   const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/notificacion/mandarSolicitudAyuda`
-  // const [idSupervisor, setIdSupervisor] = useState(null);
 
   //Funcion encargada de hacer un post en la base de datos cada que se presione el boton de solicitar ayuda
   const solicitarAyuda = () => {
-    // const supervisorId = 1;
-    const idAgente = 2;
-    // setIdSupervisor(supervisorId);
-    console.log('Ayuda solicitada');
-
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -9,7 +9,7 @@ import { useState, useCallback, useEffect } from "react";
 const MenuNotificaciones = () => {
   const [arrPrueba, setArrPrueba] = useState([]);
 
-  const url = `http://localhost:8080/notificacion/obtenerSolicitudAyuda?idUsuario=2`;
+  const url = `http://localhost:8080/notificacion/obtenerNotificaciones?idUsuario=${sessionStorage.getItem("userId")}`;
 
   const formatFechaHora = (fechaHora) => {
     const date = new Date(fechaHora);
