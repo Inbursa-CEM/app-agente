@@ -9,6 +9,7 @@ const SolicitarAyuda = () => { //idAgente
   const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/notificacion/mandarSolicitudAyuda`
   // const [idSupervisor, setIdSupervisor] = useState(null);
 
+  //Funcion encargada de hacer un post en la base de datos cada que se presione el boton de solicitar ayuda
   const solicitarAyuda = () => {
     // const supervisorId = 1;
     const idAgente = 2;

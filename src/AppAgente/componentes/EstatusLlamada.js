@@ -16,8 +16,7 @@ const sentimientoImagenes = {
   NEGATIVE: enojado,
 };
 
-//Iniciar llamada para postear la base de datos 
-//contactID 
+//Controla como es que va la llamada, muestra el sentimiento y semaforo
 const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFinal}) => {
   const [sentimiento, setSentimiento] = useState("NEUTRAL");
 
@@ -35,7 +34,7 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
     }
   }, [contactId, setTime]);
 
-  // Descargar la transcripción
+  // Descargar la transcripción para obtener el sentimiento
   const descargar = useCallback(async () => {
     if (!contactId) return; // Verifica que contactId no sea null
 
@@ -68,26 +67,12 @@ const EstatusLlamada = ({ contactId, time, setTime, idAgente, setSentimientoFina
     }
   }, [descargar, contactId]);
 
-  // Función para formatear el tiempo
-  // const tiempoFormateado = () => {
-  //   const minutos = Math.floor(time / 60000);
-  //   const segundos = Math.floor((time % 60000) / 1000);
-
-  //   const formatMinutos = minutos < 10 ? `0${minutos}` : minutos;
-  //   const formatSegundos = segundos < 10 ? `0${segundos}` : segundos;
-
-  //   return `${formatMinutos}:${formatSegundos}`;
-  // };
-
   const imagenSentimiento = sentimientoImagenes[sentimiento] || normal;
 
   return (
     <div className='llamada'>
       <div className='columnaE'>
         <div className='labelEstado'><h3>Estado de llamada</h3></div>
-        {/* <div className='normal' id='tiempo'>
-          <AccessTimeFilledIcon /> <h3>{tiempoFormateado()}</h3>
-        </div> */}
         <div className='estado'>
           <div className='columna'>
             <div className='sentimiento'>

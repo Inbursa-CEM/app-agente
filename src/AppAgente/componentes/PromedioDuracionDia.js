@@ -13,6 +13,7 @@ export default function PromedioDuracionDia(){
     const [segundos, setSegundos] = useState("");
     const [color, setColor] = useState("");
 
+    //Funcion encargada de descargar la duracion promedio de la llamada
     const descargar = useCallback(() => {
         console.log("Descargando datos")
         fetch(url)

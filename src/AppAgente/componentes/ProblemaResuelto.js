@@ -9,6 +9,7 @@ export default function ProblemasResueltosPorDia(){
     const [problemasNoResueltos, setProblemasNoResueltos] = useState(0);
     const [fecha, setFecha] = useState("");
 
+    //Funcion encargada de descargar y presentar los datos una gráfica
     const descargar = useCallback(() => {
         console.log("Descargando datos");
         fetch(url)
@@ -28,11 +29,6 @@ export default function ProblemasResueltosPorDia(){
     const totalProblemas = problemasResueltos + problemasNoResueltos;
     const porcentajeResueltos = (problemasResueltos / totalProblemas) * 100;
     const porcentajeNoResueltos = (problemasNoResueltos / totalProblemas) * 100;
-
-    // const data = [
-    //     { label: "Problemas Resueltos", value: porcentajeResueltos },
-    //     { label: "Problemas No Resueltos", value: porcentajeNoResueltos }
-    // ];
 
     return(
         <div>

@@ -3,18 +3,8 @@
 import '../styles/semaforo.css';
 
 const Semaforo = ({tiempo}) => {
-    // const [semaforoState, setSemaforoState] = useState('circuloVerdeON');
-
-    // const cambiarColor = () => {
-    //     if (semaforoState === 'circuloRojoON') {
-    //         setSemaforoState('circuloAmarilloON');
-    //     } else if (semaforoState === 'circuloAmarilloON') {
-    //         setSemaforoState('circuloVerdeON');
-    //     } else {
-    //         setSemaforoState('circuloRojoON');
-    //     }
-    // };
-
+    
+    //Funcion que encarga de cambiar el color del semáforo dependiendo de la duración de la llamada
     const obtenerClaseSemaforo = () => {
         if (tiempo < 46000) {
             return 'circuloVerdeON'; // Iniciar en verde

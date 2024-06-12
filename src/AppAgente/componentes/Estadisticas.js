@@ -8,20 +8,20 @@ import PromedioDuracionDia from './PromedioDuracionDia';
 import NumLlamadas from './NumLlamadas';
 import ProblemasResueltos from './ProblemaResuelto';
 
+//Componente modal que muestra las gráficas personales del agente por día
 const Estadisticas = ({idAgente}) => {
 
     const [modal, setModal] = useState(false);
-
     const abrirModal = () =>{
         setModal(!modal)
     };
 
+    //Encargado de abrir y cerrar el modal
     if(modal){
         document.body.classList.add('active-modal')
     }else{
         document.body.classList.remove('active-modal')
     }
-
 
     return(
         <div className="estadisticas">
@@ -54,7 +54,6 @@ const Estadisticas = ({idAgente}) => {
                                 />
                             </div>  
                         </div>
-                        {/* <Button onClick={abrirModal} className="close-modal">Cerrar</Button> */}
                     </div>
                 </div>
             </div>   )}
