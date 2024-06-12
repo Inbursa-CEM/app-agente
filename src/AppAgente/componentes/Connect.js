@@ -8,15 +8,16 @@ import { ContextoInfo } from "./ProveedorInfoCliente";
 const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente}) => {
   // Contexto de proveedor de información
   const [ , , , , , setCell, , ] = useContext(ContextoInfo);
-  const [url] = useState("http://localhost:8080/llamada/inicioLlamada");
-  const [urlFin] = useState("http://localhost:8080/llamada/finLlamada");
+  const [url] = useState(`http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/inicioLlamada`);
+  const [urlFin] = useState(`http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/finLlamada`);
   const [contacto, setContacto] = useState("")
 
 
   //Funciones encargada de mandar los datos del inicio de llamada en la base de datos 
+
   const inicializaLlamada = (contactId) =>{
     const request = {
-      method: 'POST', 
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         idUsuario: 2,
@@ -40,10 +41,10 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
   const finalizaLlamada = (contactId) =>{
     console.log("entre a finaliza")
     const request = {
-      method: 'POST', 
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        sentimiento: sentimiento, 
+        sentimiento: sentimiento,
         contactId: contactId
       })
     };
@@ -92,7 +93,7 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
     });
 
-    
+
     // Code to be executed once a call starts
     // eslint-disable-next-line no-undef
     connect.contact(function (contact) {

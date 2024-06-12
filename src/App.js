@@ -31,13 +31,11 @@ function App() {
         <div className="contenedor2">
           <InterfazGuia/>
         </div>
-        <ProveedorInfoCliente         
+        <ProveedorInfoCliente
         setIdTransaccion = {setIdTransaccion}
         >
         <div className="contenedor3">
-          <ProveedorInfoCliente>
             <InfoCliente />
-          </ProveedorInfoCliente>
         </div>
         <div className="contenedor4">
           <Connect
