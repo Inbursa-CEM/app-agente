@@ -20,8 +20,8 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idUsuario: 2,
-        idTransaccion: 2, 
+        idUsuario: {idAgente},
+        idTransaccion: {idTransaccion}, 
         contactId: contactId
       })
     };
