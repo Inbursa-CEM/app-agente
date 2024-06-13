@@ -2,7 +2,6 @@
 // Autor: Rosa Itzel Figueroa Rosas
 
 import '../styles/solicitarAyuda.css';
-import React, { useState } from "react";
 import { Button } from '@mui/material';
 
 const SolicitarAyuda = ({idAgente}) => { //idAgente
