@@ -6,7 +6,7 @@ import { useState, useCallback, useEffect } from "react";
 import '../styles/graficas.css';
 
 export default function PromedioDuracionDia(){
-    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/numLlamadas?idUsuario=${localStorage.getItem("userId")}`;
+    const url = `http://${process.env.REACT_APP_BACK_HOST}:8080/llamada/numLlamadas?idUsuario=${3}`;
     const [numLlamadas, setNumLlamadas] = useState("");
     const [fecha, setFecha] = useState("");
 

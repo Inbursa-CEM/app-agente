@@ -24,7 +24,7 @@ function App() {
           contactId={contactId}
           time = {time}
           setTime = {setTime}
-          idAgente={localStorage.getItem("userId")}
+          idAgente= {3}
           setSentimientoFinal = {setSentimientoFinal}
           />
         </div>
@@ -43,7 +43,7 @@ function App() {
           setTime={setTime}
           idTransaccion = {idTransaccion}
           sentimiento = {sentimientoFinal}
-          idAgente={localStorage.getItem("userId")}
+          idAgente={3}
           />
           </div>
         </ProveedorInfoCliente>
