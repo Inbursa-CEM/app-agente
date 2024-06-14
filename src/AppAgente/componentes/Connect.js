@@ -13,15 +13,15 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
   const [contacto, setContacto] = useState("")
 
 
-  //Funciones encargada de mandar los datos del inicio de llamada en la base de datos 
+  //Funciones encargada de mandar los datos del inicio de llamada en la base de datos
 
   const inicializaLlamada = (contactId) =>{
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idUsuario: {idAgente},
-        idTransaccion: {idTransaccion}, 
+        idUsuario: 3,
+        idTransaccion: {idTransaccion},
         contactId: contactId
       })
     };
@@ -109,7 +109,7 @@ const Connect = ({ setContactId, setTime, idTransaccion, sentimiento, idAgente})
 
       });
 
-      //Funcion que se encarga de avisar que ha terminado la llamada 
+      //Funcion que se encarga de avisar que ha terminado la llamada
       //y ayuda a set null variables para la próxima llamada
       contact.onEnded(async function (contact){
         console.log("Contact de finaliza:", contact.getContactId())

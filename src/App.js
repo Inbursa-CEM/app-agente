@@ -10,6 +10,10 @@ import { useState } from "react";
 
 function App() {
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get('userId');
+  sessionStorage.setItem("userId", userId);
+  console.log("USUARIOID", userId)
 
   const [time, setTime] = useState(0);
   const [contactId, setContactId] = useState(null);
